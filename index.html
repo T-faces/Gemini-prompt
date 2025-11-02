@@ -286,9 +286,18 @@
 
   <header>
     <div class="logo">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5">
-        <path d="M12 2L2 12h3v8h14v-8h3L12 2Z"/>
-      </svg>
+      <!-- Ikon Reload -->
+<svg 
+  width="28" height="28" viewBox="0 0 24 24" 
+  fill="none" stroke="#000" stroke-width="2.5"
+  style="cursor:pointer; transition:transform 0.2s ease;"
+  onclick="location.reload()"
+  onmouseover="this.style.transform='rotate(10deg)'"
+  onmouseout="this.style.transform='rotate(0deg)'"
+  title="Klik untuk reload halaman"
+>
+  <path d="M12 2L2 12h3v8h14v-8h3L12 2Z"/>
+</svg>
     </div>
     <h1>Gemini Prompt Maker</h1>
     <p class="subtitle">Ubah gambar menjadi prompt AI dengan detail maksimal</p>
@@ -328,25 +337,48 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
 
     
 <div class="flex flex-col items-center justify-center mt-10 space-y-4">
-  <!-- Judul -->
-  <h2 class="text-lg font-semibold text-gray-800">Donation & Support:</h2>
+<!-- ===================== -->
+<!-- DONATION & SUPPORT -->
+<!-- ===================== -->
+<div style="
+  text-align:center;
+  margin-top:30px;
+  color:#ddd;
+  font-family:'Poppins', sans-serif;
+">
+  <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:10px;">
+    💖 Donation & Support
+  </h3>
 
-  <!-- Ikon Dana & Facebook -->
-  <div class="flex items-center justify-center space-x-6">
-    <!-- Ikon Dana -->
-    <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012012021100712289849" class="hover:scale-110 transition-transform">
+  <div style="
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+  ">
+    <!-- DANA -->
+    <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012012021100712289849" 
+       target="_blank" 
+       style="transition:transform 0.2s ease;"
+       onmouseover="this.style.transform='scale(1.1)'"
+       onmouseout="this.style.transform='scale(1)'">
       <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Dana_logo.svg" 
-           alt="Dana" 
-           class="w-10 h-10 rounded-full shadow-md" />
+           alt="Dana"
+           style="width:50px; height:50px; border-radius:50%; box-shadow:0 0 10px rgba(0,0,0,0.3); background:#fff; padding:6px;">
     </a>
 
-    <!-- Ikon Facebook -->
-    <a href="https://www.facebook.com/share/1A7zDx5XD6/" target="_blank" class="hover:scale-110 transition-transform">
+    <!-- FACEBOOK -->
+    <a href="https://www.facebook.com/share/1A7zDx5XD6/" 
+       target="_blank"
+       style="transition:transform 0.2s ease;"
+       onmouseover="this.style.transform='scale(1.1)'"
+       onmouseout="this.style.transform='scale(1)'">
       <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" 
-           alt="Facebook" 
-           class="w-10 h-10 rounded-full shadow-md" />
+           alt="Facebook"
+           style="width:50px; height:50px; border-radius:50%; object-fit:cover; box-shadow:0 0 10px rgba(0,0,0,0.3); background:#fff; padding:6px;">
     </a>
   </div>
+</div>
 </div>
     <div id="toast">Teks berhasil disalin!</div>
   </div>
