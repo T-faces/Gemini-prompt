@@ -535,16 +535,20 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
       const prompt = document.getElementById('prompt').value.trim();
       const imgsrc = previewImage.src;
 
-      if (!prompt && !imgsrc) {
-        output.textContent = 'Mohon unggah gambar atau masukkan prompt.';
-        return;
+      // KOREKSI: Pengecekan hanya pada imgsrc
+      if (!imgsrc || imgsrc.length === 0) {
+        output.textContent = 'Mohon unggah gambar terlebih dahulu.';
+        return; // Menghentikan eksekusi fungsi
       }
 
       output.textContent = 'Memproses gambar...';
 
       try {
         const formData = new FormData();
-        if (prompt) formData.append('prompt', prompt);
+        // Prompt tetap disertakan, meskipun ada nilai default
+        if (prompt) formData.append('prompt', prompt); 
+        
+        // Memastikan imgsrc adalah data URL sebelum diolah menjadi blob
         if (imgsrc && imgsrc.startsWith('data:image')) {
           const blob = await (await fetch(imgsrc)).blob();
           formData.append('image', blob, 'image.jpg');
