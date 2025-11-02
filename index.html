@@ -513,12 +513,24 @@ function hideDonateElement() {
 
     /* ---------- Remove Image ---------- */
     removeBtn.addEventListener('click', () => {
+
+      const donateElement = document.getElementById('donate');
+        
       previewContainer.style.display = 'none';
       previewImage.src = '';
       fileInput.value = '';
-      output.textContent = 'Hasil akan muncul di sini...';
+
+      // KOREKSI UTAMA: Menggunakan ( ) untuk kondisi, dan == untuk perbandingan
+      if (output.textContent === 'Hasil akan muncul di sini...') { 
+
+          // Pastikan elemen donate ada sebelum mencoba memanggil style
+          if (donateElement) {
+              donateElement.style.display = 'block';
+          }
+      }
       isProcessing = false;
-    });
+});
+
 
     /* ---------- Send to API ---------- */
     async function sendPrompt() {
