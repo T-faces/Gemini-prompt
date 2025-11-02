@@ -515,21 +515,28 @@ function hideDonateElement() {
     removeBtn.addEventListener('click', () => {
 
       const donateElement = document.getElementById('donate');
-        
+      
+      // Langkah 1: Reset tampilan pratinjau dan input file
       previewContainer.style.display = 'none';
       previewImage.src = '';
       fileInput.value = '';
 
-      // KOREKSI UTAMA: Menggunakan ( ) untuk kondisi, dan == untuk perbandingan
-      if (output.textContent === 'Hasil akan muncul di sini...') { 
+      // Langkah 2: Periksa apakah output masih berisi teks default
+      // Menggunakan .trim() untuk menghapus spasi/baris baru di awal/akhir
+      if (output.textContent.trim() === 'Hasil akan muncul di sini...') { 
 
-          // Pastikan elemen donate ada sebelum mencoba memanggil style
+          // Langkah 3: Tampilkan elemen donasi jika kondisi terpenuhi
           if (donateElement) {
               donateElement.style.display = 'block';
           }
-      }
+      } 
+      // KARENA INI ADALAH FUNGSI 'REMOVE', KITA HARUS RESET OUTPUT JUGA
+      // Ini penting agar kondisi di atas bisa terpenuhi lagi di masa depan.
+      output.textContent = 'Hasil akan muncul di sini...'; 
+      
       isProcessing = false;
 });
+
 
 
     /* ---------- Send to API ---------- */
