@@ -337,7 +337,8 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
     </div>
 
     
-<div style="
+<div id="donate">
+<div   style="
   text-align:center;
   margin-top: 45px;
   margin-bottom: 25px;
@@ -401,6 +402,7 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
     </a>
   </div>
 </div>
+</div>
   
     <div id="toast">Teks berhasil disalin!</div>
   </div>
@@ -416,6 +418,17 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
     const toast = document.getElementById('toast');
     const output = document.getElementById('output');
 
+function hideDonateElement() {
+        // 1. Ambil elemen div berdasarkan ID-nya
+        const donateElement = document.getElementById('donate');
+        
+        // 2. Cek apakah elemen tersebut ada
+        if (donateElement) {
+            // 3. Ubah properti CSS 'display' menjadi 'none'
+            donateElement.style.display = 'none';
+        }
+}
+    
     function showToast(message) {
       toast.textContent = message;
       // Memastikan toast tidak memiliki posisi scroll-related saat muncul
@@ -503,6 +516,7 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
       previewContainer.style.display = 'none';
       previewImage.src = '';
       fileInput.value = '';
+      output.textContent = 'Hasil akan muncul di sini...';
       isProcessing = false;
     });
 
@@ -535,6 +549,8 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
           .trim();
 
         output.textContent = cleanResult || 'Tidak ada hasil.';
+
+        hideDonateElement();
       } catch (err) {
         output.textContent = 'Error: ' + err.message;
       }
