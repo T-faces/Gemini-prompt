@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gemini Prompt Maker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Reset & Base ---------- */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      background: linear-gradient(135deg, #0f0f1a, #1a0033);
+      color:#eee;
+      font-family:'Poppins',sans-serif;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:15px; /* Sedikit lebih kecil */
+      position:relative;
+      overflow-x:hidden;
+      font-size: 14px; /* Ukuran teks dasar lebih kecil */
+    }
+    body::before{
+      content:'';
+      position:absolute;
+      top:0;left:0;right:0;bottom:0;
+      background: radial-gradient(circle at 20% 80%, rgba(0,255,180,0.1), transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(0,200,255,0.1), transparent 50%);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    /* ---------- Header ---------- */
+    header{
+      text-align:center;
+      margin-bottom:20px;
+    }
+    .logo{
+      width:45px;height:45px; /* Lebih kecil */
+      background:linear-gradient(45deg,#00ffb3,#00ddff);
+      border-radius:50%;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:8px; /* Lebih kecil */
+      box-shadow:0 0 15px rgba(0,255,179,.5); /* Lebih kecil */
+      animation:pulse 2s infinite;
+    }
+    .logo svg {
+        width: 24px; /* Sesuaikan ukuran SVG */
+        height: 24px;
+    }
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 15px rgba(0,255,179,.5);}
+      50%{box-shadow:0 0 25px rgba(0,255,179,.8);}
+    }
+    h1{
+      font-size:1.6rem; /* Lebih kecil */
+      color:#00ffb3;
+      text-shadow:0 0 8px rgba(0,255,179,.3); /* Lebih kecil */
+    }
+    .subtitle{
+      font-size:0.85rem; /* Lebih kecil */
+      color:#aaa;
+      margin-top:4px; /* Lebih kecil */
+    }
+
+    /* ---------- Container ---------- */
+    
+.container{
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(10px);
+      padding:25px; /* Lebih kecil */
+      border-radius:18px;
+      width:100%;
+      max-width:500px; /* Lebih kecil */
+      margin:0 auto;
+      box-shadow:0 8px 32px rgba(0,0,0,.3),
+                 0 0 30px rgba(0,255,153,.15);
+      border:1px solid rgba(0,255,153,.2);
+      flex-grow:1;
+    }
+
+
+    /* ---------- Upload Box ---------- */
+    .upload-box{
+      margin-top:15px;
+      padding:18px; /* Lebih kecil */
+      border:2px dashed #444;
+      border-radius:14px;
+      background:#1a1a1a;
+      text-align:center;
+      cursor:pointer;
+      transition:all .3s ease;
+      position:relative;
+      font-size: 0.9rem; /* Lebih kecil */
+    }
+    .upload-box:hover{
+      border-color:#00ffaa;
+      background:rgba(0,255,153,.08);
+      transform:translateY(-2px);
+    }
+    .upload-box.dragover{
+      border-color:#00ffb3;
+      background:rgba(0,255,153,.15);
+      transform:scale(1.02);
+    }
+    .upload-label{
+      color:#00ffaa;
+      display:block;
+      margin-top:6px; /* Lebih kecil */
+      font-weight:600;
+      font-size:0.9rem; /* Lebih kecil */
+    }
+
+    /* ---------- Preview ---------- */
+    .preview-container{
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin:15px 0; /* Lebih kecil */
+    }
+    .preview-image{
+      width:180px; /* Lebih kecil */
+      height:auto;
+      max-height:280px; /* Lebih kecil */
+      object-fit:contain;
+      border-radius:12px; /* Lebih kecil */
+      box-shadow:0 0 12px rgba(0,255,120,.3); /* Lebih kecil */
+      border:1px solid #333;
+      transition:transform .2s;
+    }
+    .preview-image:hover{
+      transform:scale(1.03);
+    }
+    .remove-btn{
+      position:absolute;
+      top:5px; /* Lebih kecil */
+      right:calc(50% - 90px); /* Sesuaikan dengan lebar gambar */
+      background:rgba(255,50,50,.95);
+      color:#fff;
+      border:none;
+      border-radius:50%;
+      width:26px;height:26px; /* Lebih kecil */
+      font-size:18px; /* Lebih kecil */
+      font-weight:bold;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:all .2s;
+      box-shadow:0 2px 6px rgba(0,0,0,.3); /* Lebih kecil */
+    }
+    .remove-btn:hover{
+      background:#ff0000;
+      transform:scale(1.1);
+    }
+
+    /* ---------- Button ---------- */
+    button{
+      width:100%;
+      padding:12px; /* Lebih kecil */
+      margin-top:15px;
+      background:linear-gradient(45deg,#00ffaa,#00dd99);
+      color:#000;
+      font-weight:700;
+      font-size:0.95rem; /* Lebih kecil */
+      border:none;
+      border-radius:10px; /* Lebih kecil */
+      cursor:pointer;
+      transition:all .3s ease;
+      box-shadow:0 4px 12px rgba(0,255,170,.3); /* Lebih kecil */
+      position:relative;
+      overflow:hidden;
+    }
+    button::before{
+      content:'';
+      position:absolute;
+      top:0;left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+      transition:.6s;
+    }
+    button:hover::before{
+      left:100%;
+    }
+    button:hover{
+      background:linear-gradient(45deg,#00dd99,#00cc88);
+      transform:translateY(-2px);
+      box-shadow:0 6px 16px rgba(0,255,170,.4); /* Lebih kecil */
+    }
+    button:active{
+      transform:translateY(0);
+    }
+
+    /* ---------- Output ---------- */
+    pre{
+      background:#000;
+      color:#0f0;
+      padding:15px; /* Lebih kecil */
+      border-radius:10px; /* Lebih kecil */
+      margin-top:15px;
+      white-space:pre-wrap;
+      word-break:break-word;
+      min-height:70px; /* Lebih kecil */
+      font-size:0.85rem; /* Lebih kecil */
+      line-height:1.4; /* Sedikit lebih kecil */
+      border:1px solid #333;
+      box-shadow:inset 0 0 12px rgba(0,255,0,.1); /* Lebih kecil */
+      cursor:pointer;
+      transition:.2s;
+    }
+    pre:hover{
+      box-shadow:inset 0 0 16px rgba(0,255,0,.2); /* Lebih kecil */
+      background:#111;
+    }
+
+    /* ---------- Toast ---------- */
+    #toast{
+      visibility:hidden;
+      min-width:200px; /* Lebih kecil */
+      max-width:80%; /* Lebih kecil */
+      background:#00ffae;
+      color:#000;
+      text-align:center;
+      border-radius:10px; /* Lebih kecil */
+      padding:10px 15px; /* Lebih kecil */
+      position:fixed; /* Tetap fixed */
+      z-index:9999;
+      left:50%;
+      transform:translateX(-50%);
+      font-weight:600; /* Sedikit lebih kecil */
+      box-shadow:0 3px 15px rgba(0,255,150,.6); /* Lebih kecil */
+      opacity:0;
+      transition:opacity .3s ease, top .3s ease, transform .2s ease;
+      pointer-events:none;
+      top: 15px; /* Jarak dari atas */
+    }
+    #toast.show{
+      visibility:visible;
+      opacity:1;
+      top: 25px; /* Jarak dari atas saat muncul */
+      pointer-events:auto;
+    }
+    /* Media query untuk layar lebih kecil agar tidak terlalu besar */
+    @media (max-width: 600px) {
+      body {
+        font-size: 13px;
+        padding: 10px;
+      }
+      h1 { font-size: 1.4rem; }
+      .subtitle { font-size: 0.8rem; }
+      .container { padding: 20px; }
+      .upload-box { font-size: 0.85rem; padding: 15px; }
+      .upload-label { font-size: 0.85rem; }
+      .preview-image { width: 160px; max-height: 250px; }
+      .remove-btn { right:calc(50% - 80px); }
+      button { font-size: 0.9rem; padding: 10px; }
+      pre { font-size: 0.8rem; padding: 12px; min-height: 60px; }
+      #toast { min-width: 180px; padding: 8px 12px; font-size: 0.85rem; top: 10px; }
+      #toast.show { top: 20px; }
+    }
+
+
+    /* ---------- Footer ---------- */
+    footer{
+      text-align:center;
+      margin-top:25px; /* Lebih kecil */
+      color:#666;
+      font-size:0.8rem; /* Lebih kecil */
+    }
+    footer a{
+      color:#00ffaa;
+      text-decoration:none;
+      font-weight:500;
+    }
+    footer a:hover{
+      text-decoration:underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5">
+        <path d="M12 2L2 12h3v8h14v-8h3L12 2Z"/>
+      </svg>
+    </div>
+    <h1>Gemini Prompt Maker</h1>
+    <p class="subtitle">Ubah gambar menjadi prompt AI dengan detail maksimal</p>
+  </header>
+
+  <div class="container">
+
+    <textarea id="prompt" style="display:none;">
+Ubah gambar yang saya kirim menjadi deskripsi teks yang sangat detail dan realistis dalam format JSON. 
+Pastikan hasil output menggambarkan dengan akurat setiap elemen penting dari gambar, termasuk:
+- posisi tubuh dan arah pandangan subjek,
+- postur dan ekspresi wajah,
+- fitur wajah (mata, hidung, mulut, rambut, dll),
+- pakaian, warna, dan tekstur,
+- pencahayaan, latar belakang, serta suasana atau mood gambar.
+
+Hasilkan output akhir dalam format JSON yang valid, dengan struktur yang dapat digunakan langsung sebagai prompt untuk AI image generation. 
+Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
+    </textarea>
+
+    <div class="upload-box" id="dropzone">
+      <span>Seret & lepaskan gambar di sini</span>
+      <label for="image" class="upload-label">atau klik untuk memilih file</label> 
+      <input type="file" id="image" accept="image/*" style="display:none;">
+    </div>
+
+    <div class="preview-container" id="previewcontainer" style="display:none;">
+      <button class="remove-btn" id="removebtn">×</button>
+      <img id="previewimage" class="preview-image" alt="Pratinjau Gambar">
+    </div>
+
+    <button onclick="sendPrompt()">Generate Prompt JSON</button>
+
+    <div style="text-align:center;">
+      <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
+    </div>
+
+    <div id="toast">Teks berhasil disalin!</div>
+  </div>
+
+  <footer>
+    <p>Dibuat dengan ❤️ menggunakan <a href="https://gemini.google.com" target="_blank">Gemini API</a> • © 2025</p>
+  </footer>
+
+  <script>
+    const toast = document.getElementById('toast');
+    const output = document.getElementById('output');
+
+    function showToast(message) {
+      toast.textContent = message;
+      // Memastikan toast tidak memiliki posisi scroll-related saat muncul
+      toast.style.top = `${window.scrollY + 25}px`; // Menyesuaikan posisi berdasarkan scroll
+      
+      toast.classList.remove('show');
+      void toast.offsetWidth; // Trigger reflow
+      toast.classList.add('show');
+
+      clearTimeout(toast.hideTimeout);
+      toast.hideTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
+    }
+
+    // Update toast position on scroll
+    window.addEventListener('scroll', () => {
+        if (toast.classList.contains('show')) {
+            toast.style.top = `${window.scrollY + 25}px`;
+        }
+    });
+
+    output.addEventListener('click', async () => {
+      const text = output.textContent.trim();
+      if (!text || text === "Hasil akan muncul di sini...") return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("Teks berhasil disalin!");
+      } catch (err) {
+        showToast("Gagal menyalin teks!");
+      }
+    });
+
+    /* ---------- Elements ---------- */
+    const fileInput      = document.getElementById('image');
+    const previewContainer = document.getElementById('previewcontainer');
+    const previewImage   = document.getElementById('previewimage');
+    const removeBtn      = document.getElementById('removebtn');
+    const dropzone       = document.getElementById('dropzone');
+
+    /* ---------- State ---------- */
+    let isProcessing = false;
+
+    /* ---------- Preview ---------- */
+    function showPreview(file) {
+      if (isProcessing || !file || !file.type.startsWith('image/') || file.size > 3 * 1024 * 1024) return;
+      isProcessing = true;
+
+      const reader = new FileReader();
+      reader.onload = e => {
+        previewImage.src = e.target.result;
+        previewContainer.style.display = 'flex';
+        isProcessing = false;
+      };
+      reader.onerror = () => {
+        alert('Gagal membaca file.');
+        isProcessing = false;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /* ---------- Drag & Drop ---------- */
+    dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      if (isProcessing) return;
+      const file = e.dataTransfer?.files[0];
+      if (!file) return;
+      const dt = new DataTransfer(); dt.items.add(file); fileInput.files = dt.files;
+      showPreview(file);
+    });
+
+    /* ---------- Input Change ---------- */
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      showPreview(file);
+    });
+
+    /* ---------- Remove Image ---------- */
+    removeBtn.addEventListener('click', () => {
+      previewContainer.style.display = 'none';
+      previewImage.src = '';
+      fileInput.value = '';
+      isProcessing = false;
+    });
+
+    /* ---------- Send to API ---------- */
+    async function sendPrompt() {
+      const prompt = document.getElementById('prompt').value.trim();
+      const imgsrc = previewImage.src;
+
+      if (!prompt && !imgsrc) {
+        output.textContent = 'Mohon unggah gambar atau masukkan prompt.';
+        return;
+      }
+
+      output.textContent = 'Memproses gambar...';
+
+      try {
+        const formData = new FormData();
+        if (prompt) formData.append('prompt', prompt);
+        if (imgsrc && imgsrc.startsWith('data:image')) {
+          const blob = await (await fetch(imgsrc)).blob();
+          formData.append('image', blob, 'image.jpg');
+        }
+
+        const res = await fetch('/api/gemini', { method: 'POST', body: formData });
+        const data = await res.json();
+
+        let cleanResult = (data.result || data.error || 'Tidak ada hasil.')
+          .replace(/```json\s*([\s\S]*?)```/gi, '$1')
+          .replace(/```([\s\S]*?)```/gi, '$1')
+          .trim();
+
+        output.textContent = cleanResult || 'Tidak ada hasil.';
+      } catch (err) {
+        output.textContent = 'Error: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
