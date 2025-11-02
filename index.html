@@ -413,29 +413,24 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
 
   
 
-
-  <script>
+<script>
     const toast = document.getElementById('toast');
     const output = document.getElementById('output');
 
-function hideDonateElement() {
-        // 1. Ambil elemen div berdasarkan ID-nya
+    // Fungsi ini menyembunyikan elemen donasi
+    function hideDonateElement() {
         const donateElement = document.getElementById('donate');
-        
-        // 2. Cek apakah elemen tersebut ada
         if (donateElement) {
-            // 3. Ubah properti CSS 'display' menjadi 'none'
-            donateElement.style.display = 'none';
+            donateElement.style.display = 'none'; // Sembunyikan
         }
-}
+    }
     
     function showToast(message) {
       toast.textContent = message;
-      // Memastikan toast tidak memiliki posisi scroll-related saat muncul
-      toast.style.top = `${window.scrollY + 25}px`; // Menyesuaikan posisi berdasarkan scroll
+      toast.style.top = `${window.scrollY + 25}px`;
       
       toast.classList.remove('show');
-      void toast.offsetWidth; // Trigger reflow
+      void toast.offsetWidth;
       toast.classList.add('show');
 
       clearTimeout(toast.hideTimeout);
@@ -473,7 +468,7 @@ function hideDonateElement() {
     /* ---------- State ---------- */
     let isProcessing = false;
 
-    /* ---------- Preview ---------- */
+    /* ---------- Preview (showPreview dan lain-lain...) ---------- */
     function showPreview(file) {
       if (isProcessing || !file || !file.type.startsWith('image/') || file.size > 3 * 1024 * 1024) return;
       isProcessing = true;
@@ -489,9 +484,12 @@ function hideDonateElement() {
         isProcessing = false;
       };
       reader.readAsDataURL(file);
+      
+      // Saat gambar baru di-preview, kita bisa asumsikan donasi masih terlihat
+      // dan akan disembunyikan saat tombol Generate ditekan.
     }
 
-    /* ---------- Drag & Drop ---------- */
+    /* ---------- Drag & Drop (tidak ada perubahan) ---------- */
     dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
     dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
     dropzone.addEventListener('drop', e => {
@@ -504,42 +502,35 @@ function hideDonateElement() {
       showPreview(file);
     });
 
-    /* ---------- Input Change ---------- */
+    /* ---------- Input Change (tidak ada perubahan) ---------- */
     fileInput.addEventListener('change', e => {
       const file = e.target.files[0];
       if (!file) return;
       showPreview(file);
     });
 
-    /* ---------- Remove Image ---------- */
+    /* ---------- Remove Image (RESET) ---------- */
     removeBtn.addEventListener('click', () => {
 
       const donateElement = document.getElementById('donate');
       
-      // Langkah 1: Reset tampilan pratinjau dan input file
+      // 1. Reset tampilan pratinjau dan input file
       previewContainer.style.display = 'none';
       previewImage.src = '';
       fileInput.value = '';
 
-      // Langkah 2: Periksa apakah output masih berisi teks default
-      // Menggunakan .trim() untuk menghapus spasi/baris baru di awal/akhir
-      if (output.textContent.trim() === 'Hasil akan muncul di sini...') { 
-
-          // Langkah 3: Tampilkan elemen donasi jika kondisi terpenuhi
-          if (donateElement) {
-              donateElement.style.display = 'block';
-          }
-      } 
-      // KARENA INI ADALAH FUNGSI 'REMOVE', KITA HARUS RESET OUTPUT JUGA
-      // Ini penting agar kondisi di atas bisa terpenuhi lagi di masa depan.
+      // 2. Selalu Tampilkan elemen donasi ketika RESET dilakukan
+      if (donateElement) {
+          donateElement.style.display = 'block'; // Tampilkan Donasi
+      }
+      
+      // 3. Reset output ke teks default
       output.textContent = 'Hasil akan muncul di sini...'; 
       
       isProcessing = false;
 });
 
-
-
-    /* ---------- Send to API ---------- */
+    /* ---------- Send to API (SEMBUYIKAN) ---------- */
     async function sendPrompt() {
       const prompt = document.getElementById('prompt').value.trim();
       const imgsrc = previewImage.src;
@@ -569,11 +560,20 @@ function hideDonateElement() {
 
         output.textContent = cleanResult || 'Tidak ada hasil.';
 
+        // Sembunyikan Donasi HANYA setelah berhasil mendapatkan hasil
         hideDonateElement();
+        
       } catch (err) {
         output.textContent = 'Error: ' + err.message;
+        // Jika terjadi error, biarkan donasi tetap terlihat atau tampilkan lagi
+        const donateElement = document.getElementById('donate');
+        if (donateElement) {
+          donateElement.style.display = 'block'; 
+        }
       }
     }
   </script>
+
+
 </body>
 </html>
