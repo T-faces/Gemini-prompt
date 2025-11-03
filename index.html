@@ -586,7 +586,8 @@ async function sendPrompt() {
   const imgsrc = previewImage.src;  
   const type = document.querySelector('input[name="type"]:checked');  
   const format = document.querySelector('input[name="format"]:checked');  
-
+  const defaultPrompt = document.getElementById('prompt').value.trim();
+    
   if (!imgsrc || !imgsrc.startsWith('data:')) {  
     output.textContent = 'Mohon unggah gambar terlebih dahulu.';  
     return;  
@@ -629,7 +630,7 @@ Jangan tambahkan teks lain di luar text, cukup keluarkan isi text-nya saja.`;
 
     // === DEFAULT ===
     } else {  
-      finalPrompt = prompt.value.trim();  
+      finalPrompt = defaultPrompt;  
     }  
 
     // === KIRIM KE SERVER ===
