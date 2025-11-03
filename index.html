@@ -16,10 +16,10 @@
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      padding:15px; /* Sedikit lebih kecil */
+      padding:15px;
       position:relative;
       overflow-x:hidden;
-      font-size: 14px; /* Ukuran teks dasar lebih kecil */
+      font-size: 14px;
     }
     body::before{
       content:'';
@@ -37,18 +37,18 @@
       margin-bottom:20px;
     }
     .logo{
-      width:45px;height:45px; /* Lebih kecil */
+      width:45px;height:45px;
       background:linear-gradient(45deg,#00ffb3,#00ddff);
       border-radius:50%;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      margin-bottom:8px; /* Lebih kecil */
-      box-shadow:0 0 15px rgba(0,255,179,.5); /* Lebih kecil */
+      margin-bottom:8px;
+      box-shadow:0 0 15px rgba(0,255,179,.5);
       animation:pulse 2s infinite;
     }
     .logo svg {
-        width: 24px; /* Sesuaikan ukuran SVG */
+        width: 24px;
         height: 24px;
     }
     @keyframes pulse{
@@ -56,25 +56,24 @@
       50%{box-shadow:0 0 25px rgba(0,255,179,.8);}
     }
     h1{
-      font-size:1.6rem; /* Lebih kecil */
+      font-size:1.6rem;
       color:#00ffb3;
-      text-shadow:0 0 8px rgba(0,255,179,.3); /* Lebih kecil */
+      text-shadow:0 0 8px rgba(0,255,179,.3);
     }
     .subtitle{
-      font-size:0.85rem; /* Lebih kecil */
+      font-size:0.85rem;
       color:#aaa;
-      margin-top:4px; /* Lebih kecil */
+      margin-top:4px;
     }
 
     /* ---------- Container ---------- */
-    
-.container{
+    .container{
       background:rgba(255,255,255,.05);
       backdrop-filter:blur(10px);
-      padding:25px; /* Lebih kecil */
+      padding:25px;
       border-radius:18px;
       width:100%;
-      max-width:500px; /* Lebih kecil */
+      max-width:500px;
       margin:0 auto;
       box-shadow:0 8px 32px rgba(0,0,0,.3),
                  0 0 30px rgba(0,255,153,.15);
@@ -82,11 +81,10 @@
       flex-grow:1;
     }
 
-
     /* ---------- Upload Box ---------- */
     .upload-box{
       margin-top:15px;
-      padding:18px; /* Lebih kecil */
+      padding:18px;
       border:2px dashed #444;
       border-radius:14px;
       background:#1a1a1a;
@@ -94,7 +92,7 @@
       cursor:pointer;
       transition:all .3s ease;
       position:relative;
-      font-size: 0.9rem; /* Lebih kecil */
+      font-size: 0.9rem;
     }
     .upload-box:hover{
       border-color:#00ffaa;
@@ -109,9 +107,9 @@
     .upload-label{
       color:#00ffaa;
       display:block;
-      margin-top:6px; /* Lebih kecil */
+      margin-top:6px;
       font-weight:600;
-      font-size:0.9rem; /* Lebih kecil */
+      font-size:0.9rem;
     }
 
     /* ---------- Preview ---------- */
@@ -120,15 +118,15 @@
       display:flex;
       justify-content:center;
       align-items:center;
-      margin:15px 0; /* Lebih kecil */
+      margin:15px 0;
     }
     .preview-image{
-      width:180px; /* Lebih kecil */
+      width:180px;
       height:auto;
-      max-height:280px; /* Lebih kecil */
+      max-height:280px;
       object-fit:contain;
-      border-radius:12px; /* Lebih kecil */
-      box-shadow:0 0 12px rgba(0,255,120,.3); /* Lebih kecil */
+      border-radius:12px;
+      box-shadow:0 0 12px rgba(0,255,120,.3);
       border:1px solid #333;
       transition:transform .2s;
     }
@@ -137,41 +135,135 @@
     }
     .remove-btn{
       position:absolute;
-      top:5px; /* Lebih kecil */
-      right:calc(50% - 90px); /* Sesuaikan dengan lebar gambar */
+      top:5px;
+      right:calc(50% - 90px);
       background:rgba(255,50,50,.95);
       color:#fff;
       border:none;
       border-radius:50%;
-      width:26px;height:26px; /* Lebih kecil */
-      font-size:18px; /* Lebih kecil */
+      width:26px;height:26px;
+      font-size:18px;
       font-weight:bold;
       cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:center;
       transition:all .2s;
-      box-shadow:0 2px 6px rgba(0,0,0,.3); /* Lebih kecil */
+      box-shadow:0 2px 6px rgba(0,0,0,.3);
     }
     .remove-btn:hover{
       background:#ff0000;
       transform:scale(1.1);
     }
 
+    /* ---------- Options (KECIL & RAPI) ---------- */
+    .options-wrapper {
+      margin: 18px auto;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .option-group h3 {
+      font-size: 1rem;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .option-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 10px;
+    }
+
+    .option-card {
+      position: relative;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      min-height: 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .option-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 255, 179, 0.12), transparent);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .option-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 255, 179, 0.18);
+      border-color: #00ffaa;
+    }
+
+    .option-card:hover::before {
+      opacity: 1;
+    }
+
+    .option-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+
+    .option-card .icon {
+      font-size: 1.1rem;
+      transition: all 0.25s ease;
+    }
+
+    .option-card .label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      transition: all 0.25s ease;
+    }
+
+    .option-card input[type="radio"]:checked + .icon,
+    .option-card input[type="radio"]:checked + .icon + .label {
+      color: #00ffaa;
+      text-shadow: 0 0 6px rgba(0, 255, 170, 0.4);
+    }
+
+    .option-card input[type="radio"]:checked::before {
+      opacity: 1;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     /* ---------- Button ---------- */
     button{
       width:100%;
-      padding:12px; /* Lebih kecil */
+      padding:12px;
       margin-top:15px;
       background:linear-gradient(45deg,#00ffaa,#00dd99);
       color:#000;
       font-weight:700;
-      font-size:0.95rem; /* Lebih kecil */
+      font-size:0.95rem;
       border:none;
-      border-radius:10px; /* Lebih kecil */
+      border-radius:10px;
       cursor:pointer;
       transition:all .3s ease;
-      box-shadow:0 4px 12px rgba(0,255,170,.3); /* Lebih kecil */
+      box-shadow:0 4px 12px rgba(0,255,170,.3);
       position:relative;
       overflow:hidden;
     }
@@ -190,7 +282,7 @@
     button:hover{
       background:linear-gradient(45deg,#00dd99,#00cc88);
       transform:translateY(-2px);
-      box-shadow:0 6px 16px rgba(0,255,170,.4); /* Lebih kecil */
+      box-shadow:0 6px 16px rgba(0,255,170,.4);
     }
     button:active{
       transform:translateY(0);
@@ -200,105 +292,57 @@
     pre{
       background:#000;
       color:#0f0;
-      padding:15px; /* Lebih kecil */
-      border-radius:10px; /* Lebih kecil */
+      padding:15px;
+      border-radius:10px;
       margin-top:15px;
       white-space:pre-wrap;
       word-break:break-word;
-      min-height:70px; /* Lebih kecil */
-      font-size:0.85rem; /* Lebih kecil */
-      line-height:1.4; /* Sedikit lebih kecil */
+      min-height:70px;
+      font-size:0.85rem;
+      line-height:1.4;
       border:1px solid #333;
-      box-shadow:inset 0 0 12px rgba(0,255,0,.1); /* Lebih kecil */
+      box-shadow:inset 0 0 12px rgba(0,255,0,.1);
       cursor:pointer;
       transition:.2s;
     }
     pre:hover{
-      box-shadow:inset 0 0 16px rgba(0,255,0,.2); /* Lebih kecil */
+      box-shadow:inset 0 0 16px rgba(0,255,0,.2);
       background:#111;
     }
 
     /* ---------- Toast ---------- */
     #toast{
       visibility:hidden;
-      min-width:200px; /* Lebih kecil */
-      max-width:80%; /* Lebih kecil */
+      min-width:180px;
       background:#00ffae;
       color:#000;
       text-align:center;
-      border-radius:10px; /* Lebih kecil */
-      padding:10px 15px; /* Lebih kecil */
-      position:fixed; /* Tetap fixed */
+      border-radius:10px;
+      padding:10px 15px;
+      position:fixed;
       z-index:9999;
       left:50%;
       transform:translateX(-50%);
-      font-weight:600; /* Sedikit lebih kecil */
-      box-shadow:0 3px 15px rgba(0,255,150,.6); /* Lebih kecil */
+      font-weight:600;
+      box-shadow:0 3px 15px rgba(0,255,150,.6);
       opacity:0;
-      transition:opacity .3s ease, top .3s ease, transform .2s ease;
-      pointer-events:none;
-      top: 15px; /* Jarak dari atas */
+      transition:opacity .3s ease, top .3s ease;
+      top: 15px;
     }
-    #toast.show{
-      visibility:visible;
-      opacity:1;
-      top: 25px; /* Jarak dari atas saat muncul */
-      pointer-events:auto;
-    }
-    /* Media query untuk layar lebih kecil agar tidak terlalu besar */
-    @media (max-width: 600px) {
-      body {
-        font-size: 13px;
-        padding: 10px;
-      }
-      h1 { font-size: 1.4rem; }
-      .subtitle { font-size: 0.8rem; }
-      .container { padding: 20px; }
-      .upload-box { font-size: 0.85rem; padding: 15px; }
-      .upload-label { font-size: 0.85rem; }
-      .preview-image { width: 160px; max-height: 250px; }
-      .remove-btn { right:calc(50% - 80px); }
-      button { font-size: 0.9rem; padding: 10px; }
-      pre { font-size: 0.8rem; padding: 12px; min-height: 60px; }
-      #toast { min-width: 180px; padding: 8px 12px; font-size: 0.85rem; top: 10px; }
-      #toast.show { top: 20px; }
-    }
-
-
-    /* ---------- Footer ---------- */
-    footer{
-      text-align:center;
-      margin-top:25px; /* Lebih kecil */
-      color:#666;
-      font-size:0.8rem; /* Lebih kecil */
-    }
-    footer a{
-      color:#00ffaa;
-      text-decoration:none;
-      font-weight:500;
-    }
-    footer a:hover{
-      text-decoration:underline;
-    }
-  </style>
+     </style>
 </head>
 <body>
 
-  
-
   <header>
     <div class="logo">
-      <svg 
-  width="28" height="28" viewBox="0 0 24 24" 
-  fill="none" stroke="#000" stroke-width="2.5"
-  style="cursor:pointer; transition:transform 0.2s ease;"
-  onclick="location.reload()"
-  onmouseover="this.style.transform='rotate(10deg)'"
-  onmouseout="this.style.transform='rotate(0deg)'"
-  title="Klik untuk reload halaman"
->
-  <path d="M12 2L2 12h3v8h14v-8h3L12 2Z"/>
-</svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"
+           style="cursor:pointer; transition:transform 0.2s ease;"
+           onclick="location.reload()"
+           onmouseover="this.style.transform='rotate(10deg)'"
+           onmouseout="this.style.transform='rotate(0deg)'"
+           title="Klik untuk reload halaman">
+        <path d="M12 2L2 12h3v8h14v-8h3L12 2Z"/>
+      </svg>
     </div>
     <h1>Gemini Prompt Maker</h1>
     <p class="subtitle">Ubah gambar menjadi prompt AI dengan detail maksimal</p>
@@ -319,519 +363,257 @@ Hasilkan output akhir dalam format JSON yang valid, dengan struktur yang dapat d
 Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
     </textarea>
 
-<div class="upload-box" id="dropzone">
-  <span>Seret & lepaskan gambar di sini</span>
-  <label for="image" class="upload-label">atau klik untuk memilih file</label> 
-  <input type="file" id="image" accept="image/*" style="display:none;">
-</div>
-
-<div class="preview-container" id="previewcontainer" style="display:none;">
-  <button class="remove-btn" id="removebtn">×</button>
-  <img id="previewimage" class="preview-image" alt="Pratinjau Gambar">
-</div>
-
-
-
-    
-<div class="options-wrapper">
-  <!-- Type Selection -->
-  <div class="option-group">
-    <h3>Type:</h3>
-    <div class="option-cards" id="type-options">
-      <label class="option-card" data-value="general">
-        <input type="radio" name="type" value="general" checked>
-        <span class="icon">🎨</span>
-        <span class="label">General</span>
-      </label>
-      <label class="option-card" data-value="Design">
-        <input type="radio" name="type" value="Design">
-        <span class="icon">💻</span>
-        <span class="label">Web Design</span>
-      </label>
-      <label class="option-card" data-value="bug">
-        <input type="radio" name="type" value="bug">
-        <span class="icon">🐛</span>
-        <span class="label">Bug / Error</span>
-      </label>
+    <div class="upload-box" id="dropzone">
+      <span>Seret & lepaskan gambar di sini</span>
+      <label for="image" class="upload-label">atau klik untuk memilih file</label> 
+      <input type="file" id="image" accept="image/*" style="display:none;">
     </div>
-  </div>
 
-  <!-- Format Selection -->
-  <div class="option-group">
-    <h3>Format Output:</h3>
-    <div class="option-cards" id="format-options">
-      <label class="option-card" data-format="json">
-        <input type="radio" name="format" value="json" checked>
-        <span class="icon">{} </span>
-        <span class="label">JSON</span>
-      </label>
-      <label class="option-card" data-format="text">
-        <input type="radio" name="format" value="text">
-        <span class="icon">📄</span>
-        <span class="label">Text</span>
-      </label>
-      <label class="option-card" data-format="html">
-        <input type="radio" name="format" value="html">
-        <span class="icon">&lt;/&gt;</span>
-        <span class="label">HTML</span>
-      </label>
-      <label class="option-card" data-format="css">
-        <input type="radio" name="format" value="css">
-        <span class="icon">🎨</span>
-        <span class="label">CSS</span>
-      </label>
+    <div class="preview-container" id="previewcontainer" style="display:none;">
+      <button class="remove-btn" id="removebtn">×</button>
+      <img id="previewimage" class="preview-image" alt="Pratinjau Gambar">
     </div>
-  </div>
-</div>
 
-<style>
-/* ---------- Options Wrapper ---------- */
-.options-wrapper {
-  margin: 20px auto;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
+    <!-- OPTIONS YANG LEBIH KECIL & RAPI -->
+    <div class="options-wrapper">
+      <!-- Type Selection -->
+      <div class="option-group">
+        <h3>Type:</h3>
+        <div class="option-cards" id="type-options">
+          <label class="option-card" data-value="general">
+            <input type="radio" name="type" value="general" checked>
+            <span class="icon">General</span>
+            <span class="label">General</span>
+          </label>
+          <label class="option-card" data-value="Design">
+            <input type="radio" name="type" value="Design">
+            <span class="icon">Web</span>
+            <span class="label">Web Design</span>
+          </label>
+          <label class="option-card" data-value="bug">
+            <input type="radio" name="type" value="bug">
+            <span class="icon">Bug</span>
+            <span class="label">Bug / Error</span>
+          </label>
+        </div>
+      </div>
 
-.option-group h3 {
-  font-size: 1.1rem;
-  color: #38bdf8;
-  margin-bottom: 10px;
-  text-align: center;
-  font-weight: 600;
-}
+      <!-- Format Selection -->
+      <div class="option-group">
+        <h3>Format Output:</h3>
+        <div class="option-cards" id="format-options">
+          <label class="option-card" data-format="json">
+            <input type="radio" name="format" value="json" checked>
+            <span class="icon">{}</span>
+            <span class="label">JSON</span>
+          </label>
+          <label class="option-card" data-format="text">
+            <input type="radio" name="format" value="text">
+            <span class="icon">Text</span>
+            <span class="label">Text</span>
+          </label>
+          <label class="option-card" data-format="html">
+            <input type="radio" name="format" value="html">
+            <span class="icon">&lt;/&gt;</span>
+            <span class="label">HTML</span>
+          </label>
+          <label class="option-card" data-format="css">
+            <input type="radio" name="format" value="css">
+            <span class="icon">CSS</span>
+            <span class="label">CSS</span>
+          </label>
+        </div>
+      </div>
+    </div>
 
-.option-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
-}
+    <button onclick="sendPrompt()">Generate Prompt</button>
 
-.option-card {
-  position: relative;
-  background: rgba(30, 41, 59, 0.6);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  border-radius: 14px;
-  padding: 14px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+    <div style="text-align:center;">
+      <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
+    </div>
 
-.option-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 255, 179, 0.15), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
+    <div id="donate" style="text-align:center; margin:35px auto 20px; max-width:380px; background:rgba(0,0,0,0.2); border-radius:12px; padding:12px; box-shadow:0 0 10px rgba(0,255,120,0.05);">
+      <h2 style="font-weight:600; color:#e0e0e0; font-size:14px; margin-bottom:10px;">Donation & Support:</h2>
+      <div style="display:flex; justify-content:center; gap:25px;">
+        <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012012021100712289849" target="_blank"
+           style="transition:transform .25s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="https://raw.githubusercontent.com/Enowap/MediaSaver/main/dana.jpg" alt="Dana"
+               style="width:38px; height:38px; border-radius:50%; background:#0a0a0a; padding:5px; box-shadow:0 0 10px rgba(0,255,180,0.3);">
+        </a>
+        <a href="https://www.facebook.com/share/1A7zDx5XD6/" target="_blank"
+           style="transition:transform .25s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" alt="Facebook"
+               style="width:38px; height:38px; border-radius:50%; background:#0a0a0a; padding:5px; box-shadow:0 0 10px rgba(0,255,180,0.3);">
+        </a>
+      </div>
+    </div>
 
-.option-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 255, 179, 0.2);
-  border-color: #00ffaa;
-}
-
-.option-card:hover::before {
-  opacity: 1;
-}
-
-.option-card input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0; height: 0;
-}
-
-.option-card input[type="radio"]:checked + .icon,
-.option-card input[type="radio"]:checked + .label {
-  color: #00ffaa;
-  text-shadow: 0 0 8px rgba(0, 255, 170, 0.5);
-}
-
-.option-card input[type="radio"]:checked {
-  outline: none;
-}
-
-.option-card input[type="radio"]:checked ~ .option-card::before {
-  opacity: 1;
-}
-
-.option-card .icon {
-  display: block;
-  font-size: 1.4rem;
-  margin-bottom: 6px;
-  transition: all 0.3s ease;
-}
-
-.option-card .label {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-/* Active State */
-.option-card input[type="radio"]:checked ~ * {
-  color: #00ffaa !important;
-}
-
-.option-card input[type="radio"]:checked {
-  border-color: #00ffaa;
-}
-
-/* Hidden class */
-.hidden {
-  display: none !important;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .option-cards {
-    grid-template-columns: 1fr 1fr;
-  }
-  .option-card {
-    padding: 12px 8px;
-  }
-  .option-card .icon {
-    font-size: 1.2rem;
-  }
-  .option-card .label {
-    font-size: 0.85rem;
-  }
-}
-</style>
-
-    
-    
-<button onclick="sendPrompt()">Generate Prompt JSON</button>
-
-<div style="text-align:center;">
-  <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
-</div>
-    
-
-    
-<div id="donate">
-<div   style="
-  text-align:center;
-  margin-top: 45px;
-  margin-bottom: 25px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  padding: 12px 0 15px 0;
-  box-shadow: 0 0 10px rgba(0,255,120,0.05);
-  width: 90%;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-">
-  <h2 style="
-    font-weight:600;
-    color:#e0e0e0;
-    font-size:15px;
-    margin-bottom:12px;
-    letter-spacing:0.5px;
-  ">
-    Donation & Support:
-  </h2>
-
-  <div style="
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:30px;
-  ">
-    <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012012021100712289849"
-       target="_blank"
-       style="display:inline-block; transition:transform 0.25s ease;"
-       onmouseover="this.style.transform='scale(1.15)'"
-       onmouseout="this.style.transform='scale(1)'">
-      <img src="https://raw.githubusercontent.com/Enowap/MediaSaver/main/dana.jpg"
-           alt="Dana"
-           style="
-             width:42px;
-             height:42px;
-             border-radius:50%;
-             background:#0a0a0a;
-             padding:6px;
-             box-shadow:0 0 12px rgba(0,255,180,0.3);
-           ">
-    </a>
-
-    <a href="https://www.facebook.com/share/1A7zDx5XD6/"
-       target="_blank"
-       style="display:inline-block; transition:transform 0.25s ease;"
-       onmouseover="this.style.transform='scale(1.15)'"
-       onmouseout="this.style.transform='scale(1)'">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png"
-           alt="Facebook"
-           style="
-             width:42px;
-             height:42px;
-             border-radius:50%;
-             background:#0a0a0a;
-             padding:6px;
-             box-shadow:0 0 12px rgba(0,255,180,0.3);
-           ">
-    </a>
-  </div>
-</div>
-</div>
-  
     <div id="toast">Teks berhasil disalin!</div>
   </div>
 
   <footer>
-    <p>Dibuat dengan ❤️ menggunakan <a href="https://gemini.google.com" target="_blank">Gemini API</a> • © 2025</p>
+    <p>Dibuat dengan Love menggunakan <a href="https://gemini.google.com" target="_blank">Gemini API</a> • © 2025</p>
   </footer>
 
-  
-
-<script>
-const typeRadios = document.querySelectorAll('input[name="type"]');
-const formatLabels = document.querySelectorAll('.format-options label');
-const promptInput = document.getElementById('prompt'); // Definisi di luar fungsi
-const previewImage = document.getElementById('previewimage');
-const output = document.getElementById('output');
-
-
-function updateFormatVisibility() {
-  const selectedType = document.querySelector('input[name="type"]:checked')?.value;
-
-  formatLabels.forEach(label => {
-    const format = label.dataset.format;
-    const input = label.querySelector('input');
-    
-    // Default: Semua disembunyikan
-    label.classList.add("hidden");
-    input.checked = false;
-
-
-    if (selectedType === "general") {
-      // Tampilkan JSON dan Text (Diasumsikan Text juga dibutuhkan di General)
-      if (format === "json" || format === "text") {
-        label.classList.remove("hidden");
-        if (format === "json") input.checked = true; // Set JSON sebagai default General
-      }
-    } else if (selectedType === "Design") {
-      // Tampilkan HTML dan CSS
-      if (format === "html" || format === "css") {
-        label.classList.remove("hidden");
-        if (format === "html") input.checked = true; // Set HTML sebagai default Coding
-      }
-    }
-  });
-}
-
-// Jalankan saat perubahan type
-typeRadios.forEach(radio => {
-  radio.addEventListener("change", updateFormatVisibility);
-});
-
-// Jalankan saat pertama kali halaman dimuat
-updateFormatVisibility();
-
-
-  
+  <script>
     const toast = document.getElementById('toast');
-    // const output = document.getElementById('output'); // Sudah dideklarasikan di atas
+    const output = document.getElementById('output');
+    const previewImage = document.getElementById('previewimage');
+    const promptInput = document.getElementById('prompt');
 
-    // Fungsi ini menyembunyikan elemen donasi
-    function hideDonateElement() {
-        const donateElement = document.getElementById('donate');
-        if (donateElement) {
-            donateElement.style.display = 'none'; // Sembunyikan
+    // === LOGIKA HIDE/SHOW FORMAT OUTPUT (DIPERBAIKI & DIOPTIMALKAN) ===
+    const typeRadios = document.querySelectorAll('input[name="type"]');
+    const formatCards = document.querySelectorAll('#format-options .option-card');
+
+    function updateFormatVisibility() {
+      const selectedType = document.querySelector('input[name="type"]:checked')?.value || 'general';
+
+      formatCards.forEach(card => {
+        const format = card.dataset.format;
+        const input = card.querySelector('input');
+
+        // Sembunyikan semua dulu
+        card.classList.add('hidden');
+        input.checked = false;
+
+        // Tampilkan sesuai tipe
+        if (selectedType === 'general' && ['json', 'text'].includes(format)) {
+          card.classList.remove('hidden');
+          if (format === 'json') input.checked = true;
+        } else if (selectedType === 'Design' && ['html', 'css'].includes(format)) {
+          card.classList.remove('hidden');
+          if (format === 'html') input.checked = true;
+        } else if (selectedType === 'bug' && ['text'].includes(format)) {
+          card.classList.remove('hidden');
+          if (format === 'text') input.checked = true;
         }
+      });
     }
-    
+
+    // Jalankan saat load & saat ganti type
+    typeRadios.forEach(radio => radio.addEventListener('change', updateFormatVisibility));
+    updateFormatVisibility();
+
+    // === TOAST & COPY ===
     function showToast(message) {
       toast.textContent = message;
       toast.style.top = `${window.scrollY + 25}px`;
-      
       toast.classList.remove('show');
       void toast.offsetWidth;
       toast.classList.add('show');
-
       clearTimeout(toast.hideTimeout);
-      toast.hideTimeout = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2200);
+      toast.hideTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
     }
 
-    // Update toast position on scroll
     window.addEventListener('scroll', () => {
-        if (toast.classList.contains('show')) {
-            toast.style.top = `${window.scrollY + 25}px`;
-        }
+      if (toast.classList.contains('show')) {
+        toast.style.top = `${window.scrollY + 25}px`;
+      }
     });
 
     output.addEventListener('click', async () => {
       const text = output.textContent.trim();
       if (!text || text === "Hasil akan muncul di sini...") return;
-
       try {
         await navigator.clipboard.writeText(text);
         showToast("Teks berhasil disalin!");
-      } catch (err) {
+      } catch {
         showToast("Gagal menyalin teks!");
       }
     });
 
-    /* ---------- Elements ---------- */
-    const fileInput      = document.getElementById('image');
+    // === UPLOAD & PREVIEW ===
+    const fileInput = document.getElementById('image');
     const previewContainer = document.getElementById('previewcontainer');
-    // const previewImage   = document.getElementById('previewimage'); // Sudah dideklarasikan di atas
-    const removeBtn      = document.getElementById('removebtn');
-    const dropzone       = document.getElementById('dropzone');
-
-    /* ---------- State ---------- */
+    const removeBtn = document.getElementById('removebtn');
+    const dropzone = document.getElementById('dropzone');
     let isProcessing = false;
 
-    /* ---------- Preview (showPreview dan lain-lain...) ---------- */
     function showPreview(file) {
       if (isProcessing || !file || !file.type.startsWith('image/') || file.size > 3 * 1024 * 1024) return;
       isProcessing = true;
-
       const reader = new FileReader();
       reader.onload = e => {
         previewImage.src = e.target.result;
         previewContainer.style.display = 'flex';
         isProcessing = false;
       };
-      reader.onerror = () => {
-        alert('Gagal membaca file.');
-        isProcessing = false;
-      };
+      reader.onerror = () => { alert('Gagal membaca file.'); isProcessing = false; };
       reader.readAsDataURL(file);
     }
 
-    /* ---------- Drag & Drop (tidak ada perubahan) ---------- */
     dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
     dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
     dropzone.addEventListener('drop', e => {
-      e.preventDefault();
-      dropzone.classList.remove('dragover');
-      if (isProcessing) return;
+      e.preventDefault(); dropzone.classList.remove('dragover');
       const file = e.dataTransfer?.files[0];
-      if (!file) return;
-      const dt = new DataTransfer(); dt.items.add(file); fileInput.files = dt.files;
-      showPreview(file);
+      if (file) { const dt = new DataTransfer(); dt.items.add(file); fileInput.files = dt.files; showPreview(file); }
     });
 
-    /* ---------- Input Change (tidak ada perubahan) ---------- */
     fileInput.addEventListener('change', e => {
       const file = e.target.files[0];
-      if (!file) return;
-      showPreview(file);
+      if (file) showPreview(file);
     });
 
-    /* ---------- Remove Image (RESET) ---------- */
     removeBtn.addEventListener('click', () => {
-
-      const donateElement = document.getElementById('donate');
-      
-      // 1. Reset tampilan pratinjau dan input file
       previewContainer.style.display = 'none';
       previewImage.src = '';
       fileInput.value = '';
-
-      // 2. Selalu Tampilkan elemen donasi ketika RESET dilakukan
-      if (donateElement) {
-          donateElement.style.display = 'block'; // Tampilkan Donasi
-      }
-      
-      // 3. Reset output ke teks default
-      output.textContent = 'Hasil akan muncul di sini...'; 
-      
+      output.textContent = 'Hasil akan muncul di sini...';
+      document.getElementById('donate').style.display = 'block';
       isProcessing = false;
-});
+    });
 
-    /* ---------- Send to API (SEMBUYIKAN) ---------- */
-async function sendPrompt() {  
-  // Variabel sudah dideklarasikan di scope luar  
-  const prompt = promptInput.value.trim();  
-  const imgsrc = previewImage.src;  
+    // === SEND PROMPT ===
+    async function sendPrompt() {
+      const imgsrc = previewImage.src;
+      const type = document.querySelector('input[name="type"]:checked');
+      const format = document.querySelector('input[name="format"]:checked');
 
-  // Ambil type dan format yang dipilih  
-  const type = document.querySelector('input[name="type"]:checked');  
-  const format = document.querySelector('input[name="format"]:checked');  
+      if (!imgsrc || !imgsrc.startsWith('data:')) {
+        output.textContent = 'Mohon unggah gambar terlebih dahulu.';
+        return;
+      }
+      if (!type || !format) {
+        output.textContent = 'Mohon pilih Type dan Format Output.';
+        return;
+      }
 
-  // Cek jika gambar belum diunggah  
-  if (!imgsrc || imgsrc.length === 0 || imgsrc === window.location.href) {  
-    output.textContent = 'Mohon unggah gambar terlebih dahulu.';  
-    return; // Menghentikan eksekusi fungsi  
-  }  
+      output.textContent = 'Memproses gambar...';
 
-  // Cek jika belum ada yang dipilih (value checked = 0)  
-  if (!type || !format) {  
-    output.textContent = 'Mohon pilih Type dan Format Output.';  
-    return;  
-  }  
+      try {
+        const formData = new FormData();
+        let finalPrompt = '';
 
-  output.textContent = 'Memproses gambar...';  
+        if (type.value === 'Design') {
+          finalPrompt = format.value === 'html'
+            ? 'Deteksi apakah gambar ini memuat elemen atau desain website. Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."'
+            : 'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';
+        } else if (type.value === 'bug') {
+          finalPrompt = 'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. Jelaskan secara singkat penyebabnya dan solusi perbaikannya. Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';
+        } else {
+          finalPrompt = promptInput.value.trim();
+        }
 
-  try {  
-    const formData = new FormData();  
+        formData.append('prompt', finalPrompt);
+        const blob = await (await fetch(imgsrc)).blob();
+        formData.append('image', blob, 'image.jpg');
 
-    // 🔹 Logika tambahan: otomatis ubah prompt untuk type coding  
-    let finalPrompt = '';  
+        const res = await fetch('/api/gemini', { method: 'POST', body: formData });
+        const data = await res.json();
 
-    if (type.value === 'Design') {  
-      if (format.value === 'html') {  
-        finalPrompt =  
-          'Deteksi apakah gambar ini memuat elemen atau desain website. ' +  
-          'Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. ' +  
-          'Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';  
-      } else if (format.value === 'css') {  
-        finalPrompt =  
-          'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. ' +  
-          'Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. ' +  
-          'Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';  
-      }  
-    } else if (type.value === 'bug') {  
-      finalPrompt =  
-        'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. ' +  
-        'Jelaskan secara singkat penyebabnya dan solusi perbaikannya. ' +  
-        'Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';  
-    } else {  
-      // default (general)  
-      finalPrompt = prompt;  
-    }  
+        let cleanResult = (data.result || data.error || 'Tidak ada hasil.')
+          .replace(/```json\s*([\s\S]*?)```/gi, '$1')
+          .replace(/```([\s\S]*?)```/gi, '$1')
+          .trim();
 
-    // Tambahkan prompt ke FormData  
-    formData.append('prompt', finalPrompt);  
-
-    // Tambahkan file gambar  
-    if (imgsrc.startsWith('data:image')) {  
-      const blob = await (await fetch(imgsrc)).blob();  
-      formData.append('image', blob, 'image.jpg');  
-    }  
-
-    const res = await fetch('/api/gemini', { method: 'POST', body: formData });  
-    const data = await res.json();  
-
-    let cleanResult = (data.result || data.error || 'Tidak ada hasil.')  
-      .replace(/```json\s*([\s\S]*?)```/gi, '$1')  
-      .replace(/```([\s\S]*?)```/gi, '$1')  
-      .trim();  
-
-    output.textContent = cleanResult || 'Tidak ada hasil.';  
-    hideDonateElement();  
-
-  } catch (err) {  
-    output.textContent = 'Error: ' + err.message;  
-    const donateElement = document.getElementById('donate');  
-    if (donateElement) donateElement.style.display = 'block';  
-  }  
-}
+        output.textContent = cleanResult || 'Tidak ada hasil.';
+        document.getElementById('donate').style.display = 'none';
+      } catch (err) {
+        output.textContent = 'Error: ' + err.message;
+        document.getElementById('donate').style.display = 'block';
+      }
+    }
   </script>
-
-
 </body>
 </html>
