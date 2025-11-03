@@ -319,19 +319,50 @@ Hasilkan output akhir dalam format JSON yang valid, dengan struktur yang dapat d
 Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
     </textarea>
 
-    <div class="upload-box" id="dropzone">
-      <span>Seret & lepaskan gambar di sini</span>
-      <label for="image" class="upload-label">atau klik untuk memilih file</label> 
-      <input type="file" id="image" accept="image/*" style="display:none;">
-    </div>
+<!-- === Upload Gambar === -->
+<div class="upload-box" id="dropzone">
+  <span>Seret & lepaskan gambar di sini</span>
+  <label for="image" class="upload-label">atau klik untuk memilih file</label> 
+  <input type="file" id="image" accept="image/*" style="display:none;">
+</div>
 
-    <div class="preview-container" id="previewcontainer" style="display:none;">
-      <button class="remove-btn" id="removebtn">×</button>
-      <img id="previewimage" class="preview-image" alt="Pratinjau Gambar">
-    </div>
+<div class="preview-container" id="previewcontainer" style="display:none;">
+  <button class="remove-btn" id="removebtn">×</button>
+  <img id="previewimage" class="preview-image" alt="Pratinjau Gambar">
+</div>
 
-    <button onclick="sendPrompt()">Generate Prompt JSON</button>
 
+<div class="options-container" style="text-align:center; margin-bottom:20px;">
+  <h3>Type:</h3>
+  <div class="type-options" style="margin-bottom:15px;">
+    <label>
+      <input type="radio" name="type" value="general" checked> General
+    </label>
+    <label style="margin-left:15px;">
+      <input type="radio" name="type" value="coding"> Coding
+    </label>
+  </div>
+
+  <h3>Format Output:</h3>
+  <div class="format-options" style="margin-bottom:15px;">
+    <label>
+      <input type="radio" name="format" value="json" checked> JSON
+    </label>
+    <label style="margin-left:15px;">
+      <input type="radio" name="format" value="html"> HTML
+    </label>
+    <label style="margin-left:15px;">
+      <input type="radio" name="format" value="css"> CSS
+    </label>
+  </div>
+</div>
+    
+<!-- === Tombol Generate dan Output === -->
+<button onclick="sendPrompt()">Generate Prompt JSON</button>
+
+<div style="text-align:center;">
+  <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
+</div>
     <div style="text-align:center;">
       <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
     </div>
