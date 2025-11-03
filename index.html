@@ -632,7 +632,7 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
     const ilustrasiList = [
   '💡 Unggah gambar untuk menghasilkan deskripsi detail secara otomatis...',
   '🐞 Kirim tangkapan layar error untuk mendeteksi penyebab dan solusinya...',
-  '🎨 Upload ide desainmu dan ubah menjadi tampilan website siap pakai...'
+  '🎨 Upload potongan desainmu dan ubah menjadi potongan kode website siap pakai...'
    ];
 
     // variabel global untuk kontrol urutan dan karakter
@@ -643,7 +643,7 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
       if (charIndex < ilustrasiList[index].length) {
         output.textContent += ilustrasiList[index].charAt(charIndex);
         charIndex++;
-        ketikIlustrasiTimeout = setTimeout(ketikIlustrasi, 100); // Simpan ID timeout
+        ketikIlustrasiTimeout = setTimeout(ketikIlustrasi, 60); // Simpan ID timeout
       } else {
         ketikIlustrasiTimeout = setTimeout(() => { // Simpan ID timeout
           output.textContent = "";
