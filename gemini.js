@@ -126,7 +126,7 @@ console.log("✅ GEMINI_API_KEY berhasil dimuat.");
 
       const text =
         data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "Gemini tidak dapat memberikan respons.";
+        "Maaf Gemini-lab Tidak Dapat Memproses Gambar Yang Tidak Pantas.";
 
       console.log("✅ Respons Gemini:", text);
       res.status(200).json({ result: text });
