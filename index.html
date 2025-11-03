@@ -643,7 +643,7 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
       if (charIndex < ilustrasiList[index].length) {
         output.textContent += ilustrasiList[index].charAt(charIndex);
         charIndex++;
-        ketikIlustrasiTimeout = setTimeout(ketikIlustrasi, 150); // Simpan ID timeout
+        ketikIlustrasiTimeout = setTimeout(ketikIlustrasi, 100); // Simpan ID timeout
       } else {
         ketikIlustrasiTimeout = setTimeout(() => { // Simpan ID timeout
           output.textContent = "";
