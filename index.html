@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <head>
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Enowap/MediaSaver/main/logo.png">
-  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Enowap/MediaSaver/main/logo.png">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/enowap/mediasaver/main/logo.png">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/enowap/mediasaver/main/logo.png">
   <meta name="theme-color" content="#0a002b">
-  <title>Gemini Prompt Maker</title>
+  <title>gemini prompt maker</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ---------- reset & base ---------- */
@@ -19,7 +18,7 @@
     body {
       background: linear-gradient(135deg, #0f0f1a, #1a0033);
       color: #eee;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Poppins', sans-serif; /* Perbaiki P menjadi Poppins */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -59,20 +58,20 @@
     .logo svg {
         width: 24px;
         height: 24px;
-        color: #000; /* Warna ikon SVG */
+        color: #000; /* warna ikon svg */
     }
-    @keyframes pulse {
+    @keyframes pulse { /* Tambahkan @ untuk keyframes */
       0%,100% {box-shadow: 0 0 15px rgba(0,255,179,.5);}
       50% {box-shadow: 0 0 25px rgba(0,255,179,.8);}
     }
     h1 {
-      font-size: 1.8rem; /* Sedikit lebih besar */
+      font-size: 1.8rem; /* sedikit lebih besar */
       color: #00ffb3;
       text-shadow: 0 0 8px rgba(0,255,179,.3);
       margin-bottom: 4px;
     }
     .subtitle {
-      font-size: 0.9rem; /* Sedikit lebih besar */
+      font-size: 0.9rem; /* sedikit lebih besar */
       color: #aaa;
     }
 
@@ -103,16 +102,16 @@
       transition: all .3s ease;
       position: relative;
       font-size: 0.9rem;
-      display: flex; /* Untuk tata letak ikon dan teks */
+      display: flex; /* untuk tata letak ikon dan teks */
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 120px; /* Tinggi minimum */
+      min-height: 120px; /* tinggi minimum */
     }
     .upload-box:hover {
       border-color: #00ffaa;
       background: rgba(0,255,153,.08);
-      transform: translateY(-2px);
+      transform: translateY(-2px); /* Perbaiki translatey menjadi translateY */
     }
     .upload-box.dragover {
       border-color: #00ffb3;
@@ -140,11 +139,11 @@
       justify-content: center;
       align-items: center;
       margin: 15px 0;
-      height: 280px; /* Menjaga tinggi konsisten */
+      height: 280px; /* menjaga tinggi konsisten */
     }
     .preview-image {
       width: auto;
-      height: 100%; /* Mengisi tinggi container */
+      height: 100%; /* mengisi tinggi container */
       max-width: 100%;
       object-fit: contain;
       border-radius: 12px;
@@ -158,12 +157,12 @@
     .remove-btn {
       position: absolute;
       top: 5px;
-      right: 5px; /* Posisikan di kanan atas preview container */
+      right: 5px; /* posisikan di kanan atas preview container */
       background: rgba(255,50,50,.95);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 28px; height: 28px; /* Sedikit lebih besar */
+      width: 28px; height: 28px; /* sedikit lebih besar */
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
@@ -172,7 +171,7 @@
       justify-content: center;
       transition: all .2s;
       box-shadow: 0 2px 6px rgba(0,0,0,.3);
-      z-index: 10; /* Pastikan di atas gambar */
+      z-index: 10; /* pastikan di atas gambar */
     }
     .remove-btn:hover {
       background: #ff0000;
@@ -232,7 +231,7 @@
     }
 
     .option-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px); /* Perbaiki translatey menjadi translateY */
       box-shadow: 0 6px 14px rgba(0, 255, 179, 0.18);
       border-color: #00ffaa;
     }
@@ -250,7 +249,7 @@
     .option-card .icon {
       font-size: 1.1rem;
       transition: all 0.25s ease;
-      display: block; /* Agar icon dan label di baris berbeda */
+      display: block; /* agar icon dan label di baris berbeda */
     }
 
     .option-card .label {
@@ -258,7 +257,7 @@
       font-weight: 600;
       color: #cbd5e1;
       transition: all 0.25s ease;
-      display: block; /* Agar icon dan label di baris berbeda */
+      display: block; /* agar icon dan label di baris berbeda */
     }
 
     .option-card input[type="radio"]:checked + .icon,
@@ -268,10 +267,10 @@
     }
 
     .option-card input[type="radio"]:checked {
-      /* Tidak perlu ::before di sini, karena pseudo-element sudah di parent .option-card */
-      /* Cukup atur visual feedback pada parent */
-      border-color: #00ffaa; /* Border aktif */
-      box-shadow: 0 0 10px rgba(0, 255, 170, 0.5); /* Shadow aktif */
+      /* tidak perlu ::before di sini, karena pseudo-element sudah di parent .option-card */
+      /* cukup atur visual feedback pada parent */
+      border-color: #00ffaa; /* border aktif */
+      box-shadow: 0 0 10px rgba(0, 255, 170, 0.5); /* shadow aktif */
     }
     .option-card input[type="radio"]:checked + .icon + .label + .checkmark {
       /* ini placeholder untuk checkmark, jika ingin */
@@ -292,11 +291,29 @@
       display: none !important;
     }
 
+    /* --- Spinner untuk button --- */
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 3px solid #fff;
+      width: 1em; /* Ukuran relatif terhadap font-size tombol */
+      height: 1em;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     /* ---------- button ---------- */
     button {
       width: 100%;
       padding: 12px;
-      margin-top: 20px; /* Margin lebih besar */
+      margin-top: 20px; /* margin lebih besar */
       background: linear-gradient(45deg,#00ffaa,#00dd99);
       color: #000;
       font-weight: 700;
@@ -323,12 +340,21 @@
     }
     button:hover {
       background: linear-gradient(45deg,#00dd99,#00cc88);
-      transform: translateY(-2px);
+      transform: translateY(-2px); /* Perbaiki translatey menjadi translateY */
       box-shadow: 0 6px 16px rgba(0,255,170,.4);
     }
     button:active {
-      transform: translateY(0);
+      transform: translateY(0); /* Perbaiki translatey menjadi translateY */
     }
+    button:disabled { /* Gaya untuk tombol yang dinonaktifkan */
+      opacity: 0.7;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    button:disabled:hover::before {
+      left: -100%; /* Hentikan animasi hover */
+    }
+
 
     /* ---------- output ---------- */
     pre {
@@ -336,18 +362,18 @@
       color: #0f0;
       padding: 15px;
       border-radius: 10px;
-      margin-top: 20px; /* Margin lebih besar */
+      margin-top: 20px; /* margin lebih besar */
       white-space: pre-wrap;
       word-break: break-word;
-      min-height: 100px; /* Tinggi minimum lebih besar */
+      min-height: 100px; /* tinggi minimum lebih besar */
       font-size: 0.85rem;
-      line-height: 1.5; /* Line height lebih baik untuk keterbacaan */
+      line-height: 1.5; /* line height lebih baik untuk keterbacaan */
       border: 1px solid #333;
       box-shadow: inset 0 0 12px rgba(0,255,0,.1);
       cursor: pointer;
       transition: .2s;
-      overflow-y: auto; /* Scroll jika konten terlalu panjang */
-      max-height: 300px; /* Tinggi maksimum */
+      overflow-y: auto; /* scroll jika konten terlalu panjang */
+      max-height: 300px; /* tinggi maksimum */
     }
     pre:hover {
       box-shadow: inset 0 0 16px rgba(0,255,0,.2);
@@ -366,12 +392,12 @@
       position: fixed;
       z-index: 9999;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%); /* Perbaiki translatex menjadi translateX */
       font-weight: 600;
       box-shadow: 0 3px 15px rgba(0,255,150,.6);
       opacity: 0;
       transition: opacity .3s ease, top .3s ease, visibility .3s ease;
-      top: 25px; /* Posisikan lebih ke bawah agar tidak terlalu mepet */
+      top: 25px; /* posisikan lebih ke bawah agar tidak terlalu mepet */
     }
     #toast.show {
       visibility: visible;
@@ -381,7 +407,7 @@
     /* ---------- footer ---------- */
     footer {
       text-align: center;
-      margin-top: 30px; /* Margin lebih besar */
+      margin-top: 30px; /* margin lebih besar */
       color: #666;
       font-size: 0.8rem;
     }
@@ -394,8 +420,8 @@
       text-decoration: underline;
     }
 
-    /* ---------- Responsive adjustments ---------- */
-    @media (max-width: 480px) {
+    /* ---------- responsive adjustments ---------- */
+    @media (max-width: 480px) { /* Tambahkan @ untuk media query */
       h1 {
         font-size: 1.5rem;
       }
@@ -413,7 +439,7 @@
         font-size: 0.7rem;
       }
       .remove-btn {
-        right: 15px; /* Sesuaikan posisi pada layar kecil */
+        right: 15px; /* sesuaikan posisi pada layar kecil */
       }
     }
   </style>
@@ -431,216 +457,257 @@
         <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.82-4M22 12.5a10 10 0 0 1-18.82 4"/>
       </svg>
     </div>
-    <h1>Gemini Prompt Maker</h1>
-    <p class="subtitle">Ubah gambar menjadi prompt AI dengan detail maksimal</p>
+    <h1>gemini prompt maker</h1>
+    <p class="subtitle">ubah gambar menjadi prompt ai dengan detail maksimal</p>
   </header>
 
   <div class="container">
 
     <textarea id="prompt-template" style="display:none;">
-Ubahlah gambar yang saya kirim menjadi deskripsi teks yang sangat detail dan realistis.
-Pastikan hasil output menggambarkan dengan akurat setiap elemen penting dari gambar, termasuk:
-- Posisi tubuh dan arah pandangan subjek.
-- Postur dan ekspresi wajah.
-- Fitur wajah (mata, hidung, mulut, rambut, dll.).
-- Pakaian, warna, dan tekstur.
-- Pencahayaan, latar belakang, serta suasana atau mood gambar.
+ubahlah gambar yang saya kirim menjadi deskripsi teks yang sangat detail dan realistis.
+pastikan hasil output menggambarkan dengan akurat setiap elemen penting dari gambar, termasuk:
+- posisi tubuh dan arah pandangan subjek.
+- postur dan ekspresi wajah.
+- fitur wajah (mata, hidung, mulut, rambut, dll.).
+- pakaian, warna, dan tekstur.
+- pencahayaan, latar belakang, serta suasana atau mood gambar.
 
-Hasilkan output akhir dalam format {FORMAT_PLACEHOLDER} yang valid, dengan struktur yang dapat digunakan langsung sebagai prompt untuk AI Image Generation.
-Jangan tambahkan teks lain di luar {FORMAT_PLACEHOLDER}, cukup keluarkan isi {FORMAT_PLACEHOLDER}-nya saja.
+hasilkan output akhir dalam format {format_placeholder} yang valid, dengan struktur yang dapat digunakan langsung sebagai prompt untuk ai image generation.
+jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {format_placeholder}-nya saja.
     </textarea>
 
     <div class="upload-box" id="dropzone">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-up"><path d="M12 6V2"/><path d="M17.47 21.45a2.5 2.5 0 0 0 3.25-3.25L17.5 14.5l-1.5 1.5l.5.5a2.5 2.5 0 0 0-3.25 3.25L12 22l-.5-.5a2.5 2.5 0 0 0-3.25-3.25L6.5 14.5l-1.5 1.5l.5.5a2.5 2.5 0 0 0-3.25 3.25L2 22l.5.5a2.5 2.5 0 0 0 3.25-3.25L9.5 14.5l1.5-1.5l-.5-.5a2.5 2.5 0 0 0 3.25-3.25L17 6l.5-.5a2.5 2.5 0 0 0 3.25-3.25L22 2l-.5-.5a2.5 2.5 0 0 0-3.25-3.25L12 2zm0 0V6a2.5 2.5 0 0 0-3.25 3.25L6.5 14.5l-1.5 1.5l.5.5a2.5 2.5 0 0 0-3.25 3.25L2 22l.5.5a2.5 2.5 0 0 0 3.25-3.25L9.5 14.5l1.5-1.5l-.5-.5a2.5 2.5 0 0 0 3.25-3.25L17 6l.5-.5a2.5 2.5 0 0 0 3.25-3.25L22 2l-.5-.5a2.5 2.5 0 0 0-3.25-3.25L12 2zm-5 4v6M17 11.5a2.5 2.5 0 0 0-3.25-3.25L12 6V2M6.5 14.5l-1.5 1.5l.5.5a2.5 2.5 0 0 0-3.25 3.25L2 22l.5.5a2.5 2.5 0 0 0 3.25-3.25L9.5 14.5l1.5-1.5l-.5-.5a2.5 2.5 0 0 0 3.25-3.25L17 6l.5-.5a2.5 2.5 0 0 0 3.25-3.25L22 2l-.5-.5a2.5 2.5 0 0 0-3.25-3.25L12 2"/><polyline points="16 16 12 12 8 16"/><line x1="12" x2="12" y1="12" y2="21"/></svg>
-      <span>Seret & lepaskan gambar di sini</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-up"><path d="M12 6V2"/><path d="M12 18V14"/><path d="M16 16 12 12 8 16"/><line x1="12" x2="12" y1="12" y2="21"/></svg>
+      <span>seret & lepaskan gambar di sini</span>
       <label for="image" class="upload-label">atau klik untuk memilih file</label>
       <input type="file" id="image" accept="image/*" style="display:none;">
     </div>
 
-    <div class="preview-container" id="previewContainer" style="display:none;">
-      <button class="remove-btn" id="removeBtn" aria-label="Hapus Gambar">×</button>
-      <img id="previewImage" class="preview-image" alt="Pratinjau Gambar">
-    </div>
+    <div class="preview-container" id="previewContainer" style="display:none;"> <button class="remove-btn" id="removeBtn" aria-label="hapus gambar">×</button> <img id="previewImage" class="preview-image" alt="pratinjau gambar"> </div>
 
     <div class="options-wrapper">
       <div class="option-group">
-        <h3>Tipe Prompt:</h3>
+        <h3>tipe prompt:</h3>
         <div class="option-cards" id="type-options">
           <label class="option-card">
             <input type="radio" name="type" value="general" checked>
             <span class="icon">📝</span>
-            <span class="label">General</span>
+            <span class="label">general</span>
           </label>
           <label class="option-card">
             <input type="radio" name="type" value="design">
             <span class="icon">🌐</span>
-            <span class="label">Web Design</span>
+            <span class="label">web design</span>
           </label>
           <label class="option-card">
             <input type="radio" name="type" value="bug">
             <span class="icon">🐛</span>
-            <span class="label">Bug / Error</span>
+            <span class="label">bug / error</span>
           </label>
         </div>
       </div>
 
       <div class="option-group">
-        <h3>Format Output:</h3>
+        <h3>format output:</h3>
         <div class="option-cards" id="format-options">
           <label class="option-card" data-format="json">
             <input type="radio" name="format" value="json" checked>
             <span class="icon">{}</span>
-            <span class="label">JSON</span>
+            <span class="label">json</span>
           </label>
           <label class="option-card" data-format="text">
             <input type="radio" name="format" value="text">
             <span class="icon">📄</span>
-            <span class="label">Teks</span>
+            <span class="label">teks</span>
           </label>
           <label class="option-card" data-format="html">
             <input type="radio" name="format" value="html">
             <span class="icon">&lt;/&gt;</span>
-            <span class="label">HTML</span>
+            <span class="label">html</span>
           </label>
           <label class="option-card" data-format="css">
             <input type="radio" name="format" value="css">
-            <span class="icon">CSS</span>
-            <span class="label">CSS</span>
+            <span class="icon">css</span>
+            <span class="label">css</span>
           </label>
         </div>
       </div>
     </div>
 
-    <button id="generateBtn">Generate Prompt</button>
-
-    <div style="text-align:center;">
-      <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
+    <button id="generateBtn">generate prompt</button> <div style="text-align:center;">
+      <pre id="output" title="klik untuk menyalin hasil">hasil akan muncul di sini...</pre>
     </div>
 
     <div id="donate" style="text-align:center; margin:35px auto 20px; max-width:380px; background:rgba(0,0,0,0.2); border-radius:12px; padding:12px; box-shadow:0 0 10px rgba(0,255,120,0.05);">
-      <h2 style="font-weight:600; color:#e0e0e0; font-size:14px; margin-bottom:10px;">Donasi & Dukungan:</h2>
+      <h2 style="font-weight:600; color:#e0e0e0; font-size:14px; margin-bottom:10px;">donasi & dukungan:</h2>
       <div style="display:flex; justify-content:center; gap:25px;">
         <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012012021100712289849" target="_blank"
            style="transition:transform .25s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-          <img src="https://raw.githubusercontent.com/enowap/mediasaver/main/dana.jpg" alt="DANA"
+          <img src="https://raw.githubusercontent.com/enowap/mediasaver/main/dana.jpg" alt="dana"
                style="width:38px; height:38px; border-radius:50%; background:#0a0a0a; padding:5px; box-shadow:0 0 10px rgba(0,255,180,0.3);">
         </a>
         <a href="https://www.facebook.com/share/1a7zdx5xd6/" target="_blank"
            style="transition:transform .25s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" alt="Facebook"
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_logo.png" alt="facebook"
                style="width:38px; height:38px; border-radius:50%; background:#0a0a0a; padding:5px; box-shadow:0 0 10px rgba(0,255,180,0.3);">
         </a>
       </div>
     </div>
 
-    <div id="toast">Teks berhasil disalin!</div>
+    <div id="toast">teks berhasil disalin!</div>
   </div>
 
   <footer>
-    <p>Dibuat dengan ❤️ menggunakan <a href="https://gemini.google.com" target="_blank">Gemini API</a> • © 2025</p>
+    <p>dibuat dengan ❤️ menggunakan <a href="https://gemini.google.com" target="_blank">gemini api</a> • © 2025</p>
   </footer>
 
   <script>
-    const toast = document.getElementById('toast');
-    const output = document.getElementById('output');
-    const previewImage = document.getElementById('previewImage');
-    const promptTemplate = document.getElementById('prompt-template');
-    const fileInput = document.getElementById('image');
-    const previewContainer = document.getElementById('previewContainer');
-    const removeBtn = document.getElementById('removeBtn');
-    const dropzone = document.getElementById('dropzone');
-    const generateBtn = document.getElementById('generateBtn');
+    // --- Helper function for getting elements by ID (case-sensitive fix) ---
+    function getElementByIdFixed(id) {
+        const element = document.getElementById(id);
+        if (!element) {
+            console.warn(`Element with ID '${id}' not found.`);
+        }
+        return element;
+    }
 
-    let currentFile = null; // Menyimpan file yang diunggah
+    const toast = getElementByIdFixed('toast');
+    const output = getElementByIdFixed('output');
+    const previewImage = getElementByIdFixed('previewImage'); // Perbaiki ID
+    const promptTemplate = getElementByIdFixed('prompt-template');
+    const fileInput = getElementByIdFixed('image'); // Perbaiki ID
+    const previewContainer = getElementByIdFixed('previewContainer'); // Perbaiki ID
+    const removeBtn = getElementByIdFixed('removeBtn'); // Perbaiki ID
+    const dropzone = getElementByIdFixed('dropzone');
+    const generateBtn = getElementByIdFixed('generateBtn'); // Perbaiki ID
+    const donateSection = getElementByIdFixed('donate'); // Dapatkan elemen donasi
 
-    // === Logika hide/show format output ===
+    let currentFile = null; // menyimpan file yang diunggah
+    let ketikIlustrasiTimeout; // Simpan ID timeout agar bisa dihentikan
+
+    // === logika hide/show format output ===
     const typeRadios = document.querySelectorAll('input[name="type"]');
-    const formatOptionsWrapper = document.getElementById('format-options');
+    const formatOptionsWrapper = getElementByIdFixed('format-options');
     const formatCards = formatOptionsWrapper.querySelectorAll('.option-card');
     const formatRadios = formatOptionsWrapper.querySelectorAll('input[name="format"]');
 
     function updateFormatVisibility() {
       const selectedType = document.querySelector('input[name="type"]:checked')?.value || 'general';
 
-      formatCards.forEach(card => {
+      formatCards.forEach(card => { // Gunakan forEach
         const format = card.dataset.format;
         const input = card.querySelector('input');
 
-        card.classList.add('hidden'); // Sembunyikan semua dulu
-        input.checked = false; // Batalkan pilihan sebelumnya
+        card.classList.add('hidden'); // sembunyikan semua dulu
+        input.checked = false; // batalkan pilihan sebelumnya
 
         if (selectedType === 'general') {
           if (['json', 'text'].includes(format)) {
             card.classList.remove('hidden');
-            if (format === 'json') input.checked = true; // Default ke JSON untuk general
+            if (format === 'json') input.checked = true; // default ke json untuk general
           }
         } else if (selectedType === 'design') {
           if (['html', 'css'].includes(format)) {
             card.classList.remove('hidden');
-            if (format === 'html') input.checked = true; // Default ke HTML untuk design
+            if (format === 'html') input.checked = true; // default ke html untuk design
           }
         } else if (selectedType === 'bug') {
           if (['text'].includes(format)) {
             card.classList.remove('hidden');
-            if (format === 'text') input.checked = true; // Default ke Text untuk bug
+            if (format === 'text') input.checked = true; // default ke text untuk bug
           }
         }
       });
     }
 
-    // Jalankan saat load & saat ganti type
-    typeRadios.forEach(radio => radio.addEventListener('change', updateFormatVisibility));
-    updateFormatVisibility(); // Panggil pertama kali saat halaman dimuat
+    // jalankan saat load & saat ganti type
+    typeRadios.forEach(radio => radio.addEventListener('change', updateFormatVisibility)); // Gunakan forEach
+    updateFormatVisibility(); // panggil pertama kali saat halaman dimuat
 
-    // === Toast & Copy ===
-    function showToast(message) {
+
+    // reset isi awal
+    output.textContent = "";
+
+    // daftar ilustrasi teks
+    const ilustrasiList = [
+      '💡 hasilkan prompt melalui gambar yang kamu upload...',
+      '🐞 debug melalui gambar yang kamu upload...',
+      '🎨 hasilkan desain website melalui gambar yang kamu upload...'
+    ];
+
+    // variabel global untuk kontrol urutan dan karakter
+    let index = 0;
+    let charIndex = 0;
+
+    function ketikIlustrasi() {
+      if (charIndex < ilustrasiList[index].length) {
+        output.textContent += ilustrasiList[index].charAt(charIndex);
+        charIndex++;
+        ketikIlustrasiTimeout = setTimeout(ketikIlustrasi, 50); // Simpan ID timeout
+      } else {
+        ketikIlustrasiTimeout = setTimeout(() => { // Simpan ID timeout
+          output.textContent = "";
+          index = (index + 1) % ilustrasiList.length;
+          charIndex = 0;
+          ketikIlustrasi();
+        }, 2000);
+      }
+    }
+
+    // jalankan animasi
+    ketikIlustrasi();
+    
+    // === toast & copy ===
+    function showToast(message) { // Perbaiki nama fungsi
       toast.textContent = message;
-      toast.style.top = `${window.scrollY + 25}px`;
+      toast.style.top = `${window.scrollY + 25}px`; // Perbaiki scrolly menjadi scrollY
       toast.classList.add('show');
-      clearTimeout(toast.hideTimeout);
-      toast.hideTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
+      clearTimeout(toast.hideTimeout); // Perbaiki cleartimeout dan hidetimeout
+      toast.hideTimeout = setTimeout(() => toast.classList.remove('show'), 2200); // Perbaiki settimeout dan hidetimeout
     }
 
     window.addEventListener('scroll', () => {
       if (toast.classList.contains('show')) {
-        toast.style.top = `${window.scrollY + 25}px`;
+        toast.style.top = `${window.scrollY + 25}px`; // Perbaiki scrolly menjadi scrollY
       }
     });
 
     output.addEventListener('click', async () => {
       const text = output.textContent.trim();
-      if (!text || text === "Hasil akan muncul di sini...") return;
+      if (!text || text === "hasil akan muncul di sini..." || text === "memproses gambar, mohon tunggu...") return; // Tambahkan kondisi saat memproses
       try {
-        await navigator.clipboard.writeText(text);
-        showToast("Teks berhasil disalin!");
+        await navigator.clipboard.writeText(text); // Perbaiki writetext
+        showToast("teks berhasil disalin!"); // Perbaiki showtoast
       } catch (err) {
-        console.error("Gagal menyalin teks:", err);
-        showToast("Gagal menyalin teks!");
+        console.error("gagal menyalin teks:", err);
+        showToast("gagal menyalin teks!"); // Perbaiki showtoast
       }
     });
 
-    // === Upload & Preview ===
-    function showPreview(file) {
-      if (!file || !file.type.startsWith('image/')) {
-        showToast('File yang diunggah harus berupa gambar.');
+    // === upload & preview ===
+    function showPreview(file) { // Perbaiki nama fungsi
+      clearTimeout(ketikIlustrasiTimeout); // Hentikan animasi saat file di-upload
+      output.textContent = 'hasil akan muncul di sini...'; // Reset output sebelum proses
+
+      if (!file || !file.type.startsWith('image/')) { // Perbaiki startswith
+        showToast('file yang diunggah harus berupa gambar.'); // Perbaiki showtoast
         return;
       }
-      if (file.size > 3 * 1024 * 1024) { // Batas 3MB
-        showToast('Ukuran gambar maksimal 3MB.');
+      if (file.size > 3 * 1024 * 1024) { // batas 3mb
+        showToast('ukuran gambar maksimal 3mb.'); // Perbaiki showtoast
         return;
       }
 
-      currentFile = file; // Simpan file yang valid
-      const reader = new FileReader();
+      currentFile = file; // simpan file yang valid
+      const reader = new FileReader(); // Perbaiki FileReader
       reader.onload = e => {
-        previewImage.src = e.target.result;
-        previewContainer.style.display = 'flex';
-        dropzone.style.display = 'none'; // Sembunyikan dropzone saat ada gambar
-        output.textContent = 'Hasil akan muncul di sini...'; // Reset output
-        document.getElementById('donate').style.display = 'block'; // Tampilkan donasi
+        previewImage.src = e.target.result; // Perbaiki ID
+        previewContainer.style.display = 'flex'; // Perbaiki ID
+        dropzone.style.display = 'none'; // sembunyikan dropzone saat ada gambar
+        donateSection.style.display = 'block'; // tampilkan donasi
       };
-      reader.onerror = () => showToast('Gagal membaca file gambar.');
-      reader.readAsDataURL(file);
+      reader.onerror = () => showToast('gagal membaca file gambar.'); // Perbaiki showtoast
+      reader.readAsDataURL(file); // Perbaiki readasdataurl
     }
 
     dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
@@ -648,32 +715,33 @@ Jangan tambahkan teks lain di luar {FORMAT_PLACEHOLDER}, cukup keluarkan isi {FO
     dropzone.addEventListener('drop', e => {
       e.preventDefault();
       dropzone.classList.remove('dragover');
-      const file = e.dataTransfer?.files[0];
+      const file = e.dataTransfer?.files[0]; // Gunakan dataTransfer
       if (file) {
-        fileInput.files = e.dataTransfer.files; // Update file input
-        showPreview(file);
+        fileInput.files = e.dataTransfer.files; // update file input
+        showPreview(file); // Perbaiki showpreview
       }
     });
 
     fileInput.addEventListener('change', e => {
       const file = e.target.files[0];
-      if (file) showPreview(file);
+      if (file) showPreview(file); // Perbaiki showpreview
     });
 
-    removeBtn.addEventListener('click', () => {
-      previewContainer.style.display = 'none';
-      previewImage.src = '';
-      fileInput.value = ''; // Reset input file
-      currentFile = null; // Hapus file yang tersimpan
-      dropzone.style.display = 'flex'; // Tampilkan kembali dropzone
-      output.textContent = 'Hasil akan muncul di sini...';
-      document.getElementById('donate').style.display = 'block';
+    removeBtn.addEventListener('click', () => { // Perbaiki ID
+      previewContainer.style.display = 'none'; // Perbaiki ID
+      previewImage.src = ''; // Perbaiki ID
+      fileInput.value = ''; // reset input file
+      currentFile = null; // hapus file yang tersimpan
+      dropzone.style.display = 'flex'; // tampilkan kembali dropzone
+      output.textContent = 'hasil akan muncul di sini...';
+      donateSection.style.display = 'block'; // tampilkan donasi
+      ketikIlustrasi(); // Mulai animasi lagi setelah menghapus gambar
     });
 
-    // === Send Prompt ===
-    generateBtn.addEventListener('click', async () => {
+    // === send prompt ===
+    generateBtn.addEventListener('click', async () => { // Perbaiki ID
       if (!currentFile) {
-        output.textContent = 'Mohon unggah gambar terlebih dahulu.';
+        output.textContent = 'mohon unggah gambar terlebih dahulu.';
         return;
       }
 
@@ -681,69 +749,79 @@ Jangan tambahkan teks lain di luar {FORMAT_PLACEHOLDER}, cukup keluarkan isi {FO
       const selectedFormat = document.querySelector('input[name="format"]:checked');
 
       if (!selectedType || !selectedFormat) {
-        output.textContent = 'Mohon pilih Tipe Prompt dan Format Output.';
+        output.textContent = 'mohon pilih tipe prompt dan format output.';
         return;
       }
 
-      output.textContent = 'Memproses gambar, mohon tunggu...';
-      document.getElementById('donate').style.display = 'none'; // Sembunyikan saat memproses
+      // Tampilkan spinner dan nonaktifkan tombol
+      generateBtn.disabled = true;
+      generateBtn.innerHTML = '<span class="spinner"></span> Memproses...';
+      output.textContent = 'memproses gambar, mohon tunggu...';
+      donateSection.style.display = 'none'; // sembunyikan saat memproses
 
       try {
-        const formData = new FormData();
+        const formData = new FormData(); // Perbaiki FormData
         let finalPrompt = '';
 
-        // Mengambil template prompt dari textarea
-        let basePrompt = promptTemplate.value.trim();
+        // mengambil template prompt dari textarea
+        let basePrompt = promptTemplate.value.trim(); // Perbaiki ID
 
-        // Logika pembuatan prompt berdasarkan tipe dan format
+        // logika pembuatan prompt berdasarkan tipe dan format
         if (selectedType.value === 'design') {
           if (selectedFormat.value === 'html') {
-            finalPrompt = 'Deteksi apakah gambar ini memuat elemen atau desain website. Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';
+            finalPrompt = 'deteksi apakah gambar ini memuat elemen atau desain website. jika ya, buat ulang desain tersebut hanya dalam format html murni tanpa teks tambahan. jika tidak ada elemen website yang terdeteksi, balas dengan teks: "maaf, tidak ada desain html yang terdeteksi."';
           } else { // css
-            finalPrompt = 'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';
+            finalPrompt = 'analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. jika ya, hasilkan hanya kode css murni tanpa teks tambahan. jika tidak ada desain ui yang terdeteksi, balas dengan teks: "maaf, tidak ada desain css yang terdeteksi."';
           }
         } else if (selectedType.value === 'bug') {
-          finalPrompt = 'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. Jelaskan secara singkat penyebabnya dan solusi perbaikannya. Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';
+          finalPrompt = 'analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. jelaskan secara singkat penyebabnya dan solusi perbaikannya. jika gambar tidak berisi konteks bug atau error, jawab: "maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';
         } else { // general
-          // Ganti placeholder {FORMAT_PLACEHOLDER} di prompt template
-          const formatText = selectedFormat.value.toUpperCase(); // Misalnya "JSON" atau "TEXT"
-          finalPrompt = basePrompt.replace(/{FORMAT_PLACEHOLDER}/g, formatText);
+          // ganti placeholder {format_placeholder} di prompt template
+          const formatText = selectedFormat.value.toUpperCase(); // misalnya "JSON" atau "TEXT"
+          finalPrompt = basePrompt.replace(/{format_placeholder}/g, formatText);
         }
 
         formData.append('prompt', finalPrompt);
-        formData.append('image', currentFile, currentFile.name); // Gunakan currentFile yang valid
+        // Penting: Pastikan currentFile ada dan valid sebelum append
+        if (currentFile) {
+          formData.append('image', currentFile, currentFile.name); // gunakan currentFile yang valid
+        } else {
+          throw new Error("Tidak ada gambar yang diunggah untuk dikirim.");
+        }
 
-        const res = await fetch('/api/gemini', { method: 'POST', body: formData });
+
+        const res = await fetch('/api/gemini', { method: 'POST', body: formData }); // Perbaiki method 'post'
 
         if (!res.ok) {
-          const errorData = await res.json();
-          throw new Error(errorData.error || `Server error: ${res.status}`);
+          const errorData = await res.json(); // Perbaiki errordata
+          throw new Error(errorData.error || `server error: ${res.status}`); // Perbaiki error
         }
 
         const data = await res.json();
 
-        let cleanResult = (data.result || data.error || 'Tidak ada hasil.')
-          .replace(/```(json|html|css|text)?\s*([\s\S]*?)```/gi, '$2') // Hapus markdown code block
+        let cleanResult = (data.result || data.error || 'tidak ada hasil.')
+          .replace(/```(json|html|css|text)?\s*([\s\S]*?)```/gi, '$2') // hapus markdown code block
           .trim();
 
-        output.textContent = cleanResult || 'Tidak ada hasil.';
-        document.getElementById('donate').style.display = 'block'; // Tampilkan kembali donasi
-
+        output.textContent = cleanResult || 'tidak ada hasil.';
+        
       } catch (err) {
-        console.error("Error saat mengirim prompt:", err);
-        output.textContent = 'Terjadi kesalahan: ' + err.message;
-        document.getElementById('donate').style.display = 'block'; // Tampilkan kembali donasi
+        console.error("error saat mengirim prompt:", err);
+        output.textContent = 'terjadi kesalahan: ' + err.message;
+      } finally {
+        // Selalu kembalikan tombol ke keadaan semula
+        generateBtn.disabled = false;
+        generateBtn.innerHTML = 'Generate Prompt';
+        donateSection.style.display = 'block'; // tampilkan kembali donasi
       }
     });
 
-    // Menambahkan ikon ke upload box
-    const uploadBoxSVG = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-up"><path d="M12 6V2"/><path d="M17.47 21.45a2.5 2.5 0 0 0 3.25-3.25L17.5 14.5l-1.5 1.5l.5.5a2.5 2.5 0 0 0-3.25 3.25L12 22l-.5-.5a2.5 2.5 0 0 0-3.25-3.25L6.5 14.5l-1.5 1.5l.5.5a2.5 2.5 0 0 0-3.25 3.25L2 22l.5.5a2.5 2.5 0 0 0 3.25-3.25L9.5 14.5l1.5-1.5l-.5-.5a2.5 2.5 0 0 0 3.25-3.25L17 6l.5-.5a2.5 2.5 0 0 0 3.25-3.25L22 2l-.5-.5a2.5 2.5 0 0 0-3.25-3.25L12 2zm0 0V6a2.5 2.5 0 0 0-3.25 3.25L6.5 14.5l-1.5 1.5l.5.5a2.5 2.5 0 0 0-3.25 3.25L2 22l.5.5a2.5 2.5 0 0 0 3.25-3.25L9.5 14.5l1.5-1.5l-.5-.5a2.5 2.5 0 0 0 3.25-3.25L17 6l.5-.5a2.5 2.5 0 0 0 3.25-3.25L22 2l-.5-.5a2.5 2.5 0 0 0-3.25-3.25L12 2"/><polyline points="16 16 12 12 8 16"/><line x1="12" x2="12" y1="12" y2="21"/></svg>
-    `;
-    // Dropzone sudah ada SVG di HTML. Tidak perlu menambahkan lagi via JS.
+    // Menghapus ikon SVG duplikat di JS karena sudah ada di HTML
+    // const uploadBoxSvg = `
+    //   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-up"><path d="M12 6V2"/><path d="M12 18V14"/><path d="M16 16 12 12 8 16"/><line x1="12" x2="12" y1="12" y2="21"/></svg>
+    // `;
     // Pastikan SVG yang digunakan di header juga memiliki `stroke="currentColor"` atau `fill="currentColor"` agar warnanya bisa diatur via CSS.
-    // Mengganti ikon di header menjadi ikon "rotate-cw" yang lebih sesuai untuk refresh.
-
+    // Ini sudah diperbaiki di bagian HTML.
   </script>
 </body>
 </html>
