@@ -338,7 +338,10 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
       <input type="radio" name="type" value="general" checked> General
     </label>
     <label>
-      <input type="radio" name="type" value="coding"> Coding
+      <input type="radio" name="type" value="coding"> Desain 
+    </label>
+    <label>
+      <input type="radio" name="type" value="bug"> Bug / Error
     </label>
   </div>
 
@@ -364,11 +367,11 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
   text-align: center;
   background: #0f172a;
   color: #f1f5f9;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.12);
   width: 90%;
-  max-width: 400px;
+  max-width: 420px;
   margin: 20px auto;
   font-family: "Poppins", sans-serif;
 }
@@ -376,40 +379,55 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
 .options-container h3 {
   margin-bottom: 10px;
   color: #38bdf8;
+  font-size: 1.1rem;
 }
 
-.type-options, .format-options {
+/* --- 3 Options Simetris --- */
+.type-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.format-options {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 15px;
+  gap: 14px;
+  margin-bottom: 12px;
 }
 
 label {
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
   background: #1e293b;
-  padding: 8px 14px;
+  padding: 10px 16px;
   border-radius: 8px;
-  transition: 0.3s;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: center;
 }
 
 label:hover {
   background: #334155;
+  transform: scale(1.05);
 }
 
 input[type="radio"] {
   accent-color: #38bdf8;
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .hidden {
   display: none !important;
 }
 </style>
-
 
     
     
@@ -686,21 +704,30 @@ updateFormatVisibility();
       const formData = new FormData();
 
       // 🔹 Logika tambahan: otomatis ubah prompt untuk type coding
-      let finalPrompt = prompt;
+      let finalPrompt = '';
 
-      if (type.value === 'coding') {
-        if (format.value === 'html') {
-          finalPrompt =
-            'Deteksi apakah gambar ini memuat elemen atau desain website. ' +
-            'Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. ' +
-            'Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';
-        } else if (format.value === 'css') {
-          finalPrompt =
-            'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. ' +
-            'Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. ' +
-            'Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';
-        }
-      }
+if (type === 'coding') {
+  if (format === 'html') {
+    finalPrompt =
+      'Deteksi apakah gambar ini memuat elemen atau desain website. ' +
+      'Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. ' +
+      'Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';
+  } else if (format === 'css') {
+    finalPrompt =
+      'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. ' +
+      'Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. ' +
+      'Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';
+  }
+} else if (type === 'bug') {
+  finalPrompt =
+    'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. ' +
+    'Jelaskan secara singkat penyebabnya dan solusi perbaikannya. ' +
+    'Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';
+} else {
+  // default (general)
+  finalPrompt = promptInput || 'Deskripsikan isi dari gambar ini.';
+  }
+}
 
       // Tambahkan prompt ke FormData
       formData.append('prompt', finalPrompt);
