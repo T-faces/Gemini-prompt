@@ -347,6 +347,7 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
   <div class="format-options">
     <label data-format="json">
       <input type="radio" name="format" value="json" checked> JSON
+      <input type="radio" name="format" value="text" checked> Text      
     </label>
     <label data-format="html">
       <input type="radio" name="format" value="html"> HTML
@@ -417,9 +418,7 @@ input[type="radio"] {
 <div style="text-align:center;">
   <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
 </div>
-    <div style="text-align:center;">
-      <pre id="output" title="Klik untuk menyalin hasil">Hasil akan muncul di sini...</pre>
-    </div>
+    
 
     
 <div id="donate">
@@ -647,63 +646,78 @@ updateFormatVisibility();
 });
 
     /* ---------- Send to API (SEMBUYIKAN) ---------- */
-    async function sendPrompt() {
-      const prompt = document.getElementById('prompt').value.trim();
-      const imgsrc = previewImage.src;
+  async function sendPrompt() {
+  const promptInput = document.getElementById('prompt');
+  const prompt = promptInput ? promptInput.value.trim() : '';
+  const previewImage = document.getElementById('previewimage');
+  const output = document.getElementById('output');
+  const imgsrc = previewImage?.src || '';
 
-      
   // Ambil type dan format yang dipilih
   const type = document.querySelector('input[name="type"]:checked');
   const format = document.querySelector('input[name="format"]:checked');
-  
+
   // Jika belum ada yang dipilih (value checked = 0)
   if (!type || !format) {
     output.textContent = 'Mohon masukan pilihanmu...';
-    return; // hentikan eksekusi
+    return;
   }
-      
-  
-      // KOREKSI: Pengecekan hanya pada imgsrc
-      if (!imgsrc || imgsrc.length === 0) {
-        output.textContent = 'Mohon unggah gambar terlebih dahulu.';
-        return; // Menghentikan eksekusi fungsi
-      }
 
-      output.textContent = 'Memproses gambar...';
+  // Cek jika gambar belum diunggah
+  if (!imgsrc || imgsrc.length === 0) {
+    output.textContent = 'Mohon unggah gambar terlebih dahulu.';
+    return;
+  }
 
-      try {
-        const formData = new FormData();
-        // Prompt tetap disertakan, meskipun ada nilai default
-        if (prompt) formData.append('prompt', prompt); 
-        
-        // Memastikan imgsrc adalah data URL sebelum diolah menjadi blob
-        if (imgsrc && imgsrc.startsWith('data:image')) {
-          const blob = await (await fetch(imgsrc)).blob();
-          formData.append('image', blob, 'image.jpg');
-        }
+  output.textContent = 'Memproses gambar...';
 
-        const res = await fetch('/api/gemini', { method: 'POST', body: formData });
-        const data = await res.json();
+  try {
+    const formData = new FormData();
 
-        let cleanResult = (data.result || data.error || 'Tidak ada hasil.')
-          .replace(/```json\s*([\s\S]*?)```/gi, '$1')
-          .replace(/```([\s\S]*?)```/gi, '$1')
-          .trim();
+    // 🔹 Logika tambahan: otomatis ubah prompt untuk type coding
+    let finalPrompt = prompt;
 
-        output.textContent = cleanResult || 'Tidak ada hasil.';
-
-        // Sembunyikan Donasi HANYA setelah berhasil mendapatkan hasil
-        hideDonateElement();
-        
-      } catch (err) {
-        output.textContent = 'Error: ' + err.message;
-        // Jika terjadi error, biarkan donasi tetap terlihat atau tampilkan lagi
-        const donateElement = document.getElementById('donate');
-        if (donateElement) {
-          donateElement.style.display = 'block'; 
-        }
+    if (type.value === 'coding') {
+      if (format.value === 'html') {
+        finalPrompt =
+          'Deteksi apakah gambar ini memuat elemen atau desain website. ' +
+          'Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. ' +
+          'Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';
+      } else if (format.value === 'css') {
+        finalPrompt =
+          'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. ' +
+          'Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. ' +
+          'Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';
       }
     }
+
+    // Tambahkan prompt ke FormData
+    formData.append('prompt', finalPrompt);
+
+    // Tambahkan file gambar
+    if (imgsrc && imgsrc.startsWith('data:image')) {
+      const blob = await (await fetch(imgsrc)).blob();
+      formData.append('image', blob, 'image.jpg');
+    }
+
+    const res = await fetch('/api/gemini', { method: 'POST', body: formData });
+    const data = await res.json();
+
+    let cleanResult = (data.result || data.error || 'Tidak ada hasil.')
+      .replace(/```json\s*([\s\S]*?)```/gi, '$1')
+      .replace(/```([\s\S]*?)```/gi, '$1')
+      .trim();
+
+    output.textContent = cleanResult || 'Tidak ada hasil.';
+    hideDonateElement();
+
+  } catch (err) {
+    output.textContent = 'Error: ' + err.message;
+    const donateElement = document.getElementById('donate');
+    if (donateElement) donateElement.style.display = 'block';
+  }
+}
+  }
   </script>
 
 
