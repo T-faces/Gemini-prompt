@@ -1,4 +1,4 @@
-// Gemini.js 
+// === Gemini.js ===
 import formidable from "formidable";
 import fs from "fs";
 import fetch from "node-fetch";
@@ -8,31 +8,46 @@ import pkg from "pg";
 dotenv.config();
 
 const { Pool } = pkg;
+
+// === Konfigurasi koneksi database ===
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
 });
 
+// === Tes koneksi langsung saat deploy ===
+(async () => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    console.log("✅ Database terhubung!");
+    console.log("🕒 Waktu server:", result.rows[0].now);
+  } catch (err) {
+    console.log("❌ Gagal konek database:", err.message);
+  }
+})();
+
 export const config = { api: { bodyParser: false } }; // penting untuk handle upload file
 
+// === Handler utama ===
 export default async function handler(req, res) {
-  // ====== METHOD GET → TEST DATABASE ======
+  // ====== METHOD GET → TES DATABASE MANUAL ======
   if (req.method === "GET") {
     try {
       const result = await pool.query("SELECT NOW()");
-      console.log("✅ Koneksi database berhasil!");
+      console.log("✅ Tes koneksi DB berhasil!");
       console.log("🕒 Waktu server:", result.rows[0].now);
-      res.status(200).send("Tes koneksi berhasil, cek log di Vercel!");
+      res.status(200).send("Tes koneksi berhasil — cek log Vercel!");
     } catch (err) {
-      console.log("❌ Gagal konek DB:", err.message);
-      res.status(500).send("Koneksi DB gagal, cek log!");
+      console.log("❌ Tes koneksi gagal:", err.message);
+      res.status(500).send("Tes koneksi gagal — cek log!");
     }
     return;
   }
 
-  // ====== METHOD POST → GEMINI PROCESS ======
+  // ====== METHOD POST → PROSES GEMINI ======
   if (req.method === "POST") {
     console.log("🚀 Memulai proses Gemini...");
+
     const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     if (!GEMINI_API_KEY) {
       console.log("❌ Kunci API Gemini tidak ditemukan di .env");
@@ -50,10 +65,12 @@ export default async function handler(req, res) {
       const userPrompt = fields.prompt?.[0] || "";
       let parts = [];
 
+      // === Jika ada gambar ===
       if (files.image?.[0]) {
         const file = files.image[0];
         const fileBuffer = fs.readFileSync(file.filepath);
         const base64Data = fileBuffer.toString("base64");
+
         parts.push({
           inlineData: { mimeType: file.mimetype, data: base64Data },
         });
@@ -65,6 +82,7 @@ export default async function handler(req, res) {
         }
       }
 
+      // === Jika ada teks prompt ===
       if (userPrompt) {
         parts.push({ text: userPrompt });
       }
@@ -75,6 +93,7 @@ export default async function handler(req, res) {
         return;
       }
 
+      // === Panggil API Gemini ===
       const response = await fetch(
         `${BASE_URL}/models/${MODEL}:generateContent?key=${GEMINI_API_KEY}`,
         {
@@ -105,7 +124,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  // ====== METHOD LAIN ======
+  // ====== METHOD LAIN ( selain GET & POST ) ======
   console.log("⚠️ Metode tidak diizinkan:", req.method);
   res.status(405).send("Gunakan GET atau POST.");
 }
