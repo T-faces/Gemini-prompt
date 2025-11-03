@@ -582,39 +582,41 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
     });
 
     // === SEND PROMPT ===
-    async function sendPrompt() {
-      const imgsrc = previewImage.src;
-      const type = document.querySelector('input[name="type"]:checked');
-      const format = document.querySelector('input[name="format"]:checked');
+async function sendPrompt() {  
+  const imgsrc = previewImage.src;  
+  const type = document.querySelector('input[name="type"]:checked');  
+  const format = document.querySelector('input[name="format"]:checked');  
 
-      if (!imgsrc || !imgsrc.startsWith('data:')) {
-        output.textContent = 'Mohon unggah gambar terlebih dahulu.';
-        return;
-      }
-      if (!type || !format) {
-        output.textContent = 'Mohon pilih Type dan Format Output.';
-        return;
-      }
+  if (!imgsrc || !imgsrc.startsWith('data:')) {  
+    output.textContent = 'Mohon unggah gambar terlebih dahulu.';  
+    return;  
+  }  
+  if (!type || !format) {  
+    output.textContent = 'Mohon pilih Type dan Format Output.';  
+    return;  
+  }  
 
-      output.textContent = 'Memproses gambar...';
+  output.textContent = 'Memproses gambar...';  
 
-      try {
-        const formData = new FormData();
-        let finalPrompt = '';
+  try {  
+    const formData = new FormData();  
+    let finalPrompt = '';  
 
-        if (type.value === 'Design') {        
-if (type.value === 'webdesign') {
-  if (format.value === 'html') {
-    finalPrompt = 'Deteksi apakah gambar ini memuat elemen atau desain website. Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';
-  } else {
-    finalPrompt = 'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';
-  }
+    // === TYPE: WEBDESIGN ===
+    if (type.value === 'Design') {  
+      if (format.value === 'html') {  
+        finalPrompt = 'Deteksi apakah gambar ini memuat elemen atau desain website. Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';  
+      } else {  
+        finalPrompt = 'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';  
+      }  
 
-} else if (type.value === 'bug') {
-  finalPrompt = 'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. Jelaskan secara singkat penyebabnya dan solusi perbaikannya. Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';
+    // === TYPE: BUG / ERROR ===
+    } else if (type.value === 'bug') {  
+      finalPrompt = 'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. Jelaskan secara singkat penyebabnya dan solusi perbaikannya. Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';  
 
-} else if (type.value === 'general' && format.value === 'text') {
-  finalPrompt = `Ubah gambar yang saya kirim menjadi deskripsi teks yang sangat detail dan realistis dalam format JSON.
+    // === TYPE: GENERAL ===
+    } else if (type.value === 'general' && format.value === 'text') {  
+      finalPrompt = `Ubah gambar yang saya kirim menjadi deskripsi teks yang sangat detail dan realistis dalam format JSON.
 Pastikan hasil output menggambarkan dengan akurat setiap elemen penting dari gambar, termasuk:
 - posisi tubuh dan arah pandangan subjek,
 - postur dan ekspresi wajah,
@@ -623,31 +625,34 @@ Pastikan hasil output menggambarkan dengan akurat setiap elemen penting dari gam
 - pencahayaan, latar belakang, serta suasana atau mood gambar.
 
 Hasilkan output akhir dalam format text yang valid, dengan struktur yang dapat digunakan langsung sebagai prompt untuk AI image generation.
-Jangan tambahkan teks lain di luar text, cukup keluarkan isi text-nya saja.`;
+Jangan tambahkan teks lain di luar text, cukup keluarkan isi text-nya saja.`;  
 
-} else {
-  finalPrompt = promptInput.value.trim();
-    }
+    // === DEFAULT ===
+    } else {  
+      finalPrompt = prompt.value.trim();  
+    }  
 
-        formData.append('prompt', finalPrompt);
-        const blob = await (await fetch(imgsrc)).blob();
-        formData.append('image', blob, 'image.jpg');
+    // === KIRIM KE SERVER ===
+    formData.append('prompt', finalPrompt);  
+    const blob = await (await fetch(imgsrc)).blob();  
+    formData.append('image', blob, 'image.jpg');  
 
-        const res = await fetch('/api/gemini', { method: 'POST', body: formData });
-        const data = await res.json();
+    const res = await fetch('/api/gemini', { method: 'POST', body: formData });  
+    const data = await res.json();  
 
-        let cleanResult = (data.result || data.error || 'Tidak ada hasil.')
-          .replace(/```json\s*([\s\S]*?)```/gi, '$1')
-          .replace(/```([\s\S]*?)```/gi, '$1')
-          .trim();
+    let cleanResult = (data.result || data.error || 'Tidak ada hasil.')  
+      .replace(/```json\s*([\s\S]*?)```/gi, '$1')  
+      .replace(/```([\s\S]*?)```/gi, '$1')  
+      .trim();  
 
-        output.textContent = cleanResult || 'Tidak ada hasil.';
-        document.getElementById('donate').style.display = 'none';
-      } catch (err) {
-        output.textContent = 'Error: ' + err.message;
-        document.getElementById('donate').style.display = 'block';
-      }
-    }
+    output.textContent = cleanResult || 'Tidak ada hasil.';  
+    document.getElementById('donate').style.display = 'none';  
+
+  } catch (err) {  
+    output.textContent = 'Error: ' + err.message;  
+    document.getElementById('donate').style.display = 'block';  
+  }  
+}
   </script>
 </body>
 </html>
