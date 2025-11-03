@@ -53,9 +53,11 @@ Hosting: Vercel
 
 
 
-🇮🇩 Indonesian
 
-Gemini-lab: Antarmuka Prompt Gambar Sederhana
+
+## 🇮🇩 Indonesian
+
+## Gemini-lab: Antarmuka Prompt Gambar Sederhana
 
 Gemini-lab adalah aplikasi web ringan yang memungkinkan Anda menghasilkan deskripsi (prompt) atau analisis langsung dari gambar menggunakan Gemini API.
 
