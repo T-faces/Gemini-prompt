@@ -548,7 +548,7 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
         </a>
         <a href="https://www.facebook.com/share/1a7zdx5xd6/" target="_blank"
            style="transition:transform .25s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_logo.png" alt="facebook"
+           <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" alt="facebook"
                style="width:38px; height:38px; border-radius:50%; background:#0a0a0a; padding:5px; box-shadow:0 0 10px rgba(0,255,180,0.3);">
         </a>
       </div>
@@ -630,10 +630,10 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
 
     // daftar ilustrasi teks
     const ilustrasiList = [
-      '💡 hasilkan prompt melalui gambar yang kamu upload...',
-      '🐞 debug melalui gambar yang kamu upload...',
-      '🎨 hasilkan desain website melalui gambar yang kamu upload...'
-    ];
+  '💡 Unggah gambar untuk menghasilkan deskripsi detail secara otomatis...',
+  '🐞 Kirim tangkapan layar error untuk mendeteksi penyebab dan solusinya...',
+  '🎨 Upload ide desainmu dan ubah menjadi tampilan website siap pakai...'
+   ];
 
     // variabel global untuk kontrol urutan dan karakter
     let index = 0;
@@ -643,7 +643,7 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
       if (charIndex < ilustrasiList[index].length) {
         output.textContent += ilustrasiList[index].charAt(charIndex);
         charIndex++;
-        ketikIlustrasiTimeout = setTimeout(ketikIlustrasi, 50); // Simpan ID timeout
+        ketikIlustrasiTimeout = setTimeout(ketikIlustrasi, 150); // Simpan ID timeout
       } else {
         ketikIlustrasiTimeout = setTimeout(() => { // Simpan ID timeout
           output.textContent = "";
