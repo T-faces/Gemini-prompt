@@ -9,6 +9,7 @@ dotenv.config();
 
 const { Pool } = pkg;
 
+
 // === Konfigurasi koneksi database ===
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -48,18 +49,30 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     console.log("🚀 Memulai proses Gemini...");
 
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-    if (!GEMINI_API_KEY) {
-      console.log("❌ Kunci API Gemini tidak ditemukan di .env");
-      res.status(500).send("Kunci API tidak ditemukan");
-      return;
-    }
+
+    // === KONFIGURASI GEMINI API ===
+
+// Gunakan nilai dari .env lokal atau environment di Vercel
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
+
+// Validasi jika key tidak ditemukan
+if (!GEMINI_API_KEY) {
+  console.error("❌ Kunci API Gemini tidak ditemukan di .env atau Environment Vercel.");
+  if (typeof res !== "undefined" && res.status) {
+    res.status(500).send("Kunci API tidak ditemukan.");
+    return;
+  }
+  throw new Error("Kunci API Gemini tidak ditemukan di konfigurasi environment.");
+}
+
+console.log("✅ GEMINI_API_KEY berhasil dimuat.");
 
     const MODEL = "gemini-2.5-flash";
     const BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
 
     try {
       const form = formidable({});
+    
       const [fields, files] = await form.parse(req);
 
       const userPrompt = fields.prompt?.[0] || "";
