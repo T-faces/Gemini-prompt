@@ -523,12 +523,12 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
           <label class="option-card" data-format="html">
             <input type="radio" name="format" value="html">
             <span class="icon">&lt;/&gt;</span>
-            <span class="label">html</span>
+            <span class="label">css+html</span>
           </label>
           <label class="option-card" data-format="css">
             <input type="radio" name="format" value="css">
             <span class="icon">css</span>
-            <span class="label">css</span>
+            <span class="label">tailwind template</span>
           </label>
         </div>
       </div>
@@ -769,9 +769,9 @@ jangan tambahkan teks lain di luar {format_placeholder}, cukup keluarkan isi {fo
         // logika pembuatan prompt berdasarkan tipe dan format
         if (selectedType.value === 'design') {
           if (selectedFormat.value === 'html') {
-            finalPrompt = 'deteksi apakah gambar ini memuat elemen atau desain website. jika ya, buat ulang desain tersebut hanya dalam format html murni tanpa teks tambahan. jika tidak ada elemen website yang terdeteksi, balas dengan teks: "maaf, tidak ada desain html yang terdeteksi."';
+            finalPrompt = 'deteksi apakah gambar ini memuat elemen atau desain website. jika ya, buat ulang desain tersebut hanya dalam format css+html murni tanpa teks tambahan. jika tidak ada elemen website yang terdeteksi, balas dengan teks: "maaf, tidak ada desain html atau css yang terdeteksi."';
           } else { // css
-            finalPrompt = 'analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. jika ya, hasilkan hanya kode css murni tanpa teks tambahan. jika tidak ada desain ui yang terdeteksi, balas dengan teks: "maaf, tidak ada desain css yang terdeteksi."';
+            finalPrompt = 'analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. jika ya, hasilkan hanya kode berupa tailwind template murni tanpa teks tambahan. jika tidak ada desain ui yang terdeteksi, balas dengan teks: "maaf, tidak ada desain html atau css yang terdeteksi."';
           }
         } else if (selectedType.value === 'bug') {
           finalPrompt = 'analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. jelaskan secara singkat penyebabnya dan solusi perbaikannya. jika gambar tidak berisi konteks bug atau error, jawab: "maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';
