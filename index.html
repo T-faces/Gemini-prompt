@@ -331,6 +331,8 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
 </div>
 
 
+
+    
 <div class="options-container">
   <h3>Type:</h3>
   <div class="type-options">
@@ -338,7 +340,7 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
       <input type="radio" name="type" value="general" checked> General
     </label>
     <label>
-      <input type="radio" name="type" value="coding"> Desain 
+      <input type="radio" name="type" value="Design"> Web Design 
     </label>
     <label>
       <input type="radio" name="type" value="bug"> Bug / Error
@@ -367,9 +369,9 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
   text-align: center;
   background: #0f172a;
   color: #f1f5f9;
-  padding: 22px;
-  border-radius: 14px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.12);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
   width: 90%;
   max-width: 420px;
   margin: 20px auto;
@@ -382,36 +384,24 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
   font-size: 1.1rem;
 }
 
-/* --- 3 Options Simetris --- */
-.type-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.format-options {
+.type-options, .format-options {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
-  margin-bottom: 12px;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 label {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
   cursor: pointer;
   background: #1e293b;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: 8px;
   transition: all 0.25s ease;
   font-size: 0.95rem;
-  width: 100%;
-  text-align: center;
 }
 
 label:hover {
@@ -541,7 +531,7 @@ function updateFormatVisibility() {
         label.classList.remove("hidden");
         if (format === "json") input.checked = true; // Set JSON sebagai default General
       }
-    } else if (selectedType === "coding") {
+    } else if (selectedType === "Design") {
       // Tampilkan HTML dan CSS
       if (format === "html" || format === "css") {
         label.classList.remove("hidden");
@@ -675,86 +665,83 @@ updateFormatVisibility();
 });
 
     /* ---------- Send to API (SEMBUYIKAN) ---------- */
-  async function sendPrompt() {
-    // Variabel sudah dideklarasikan di scope luar
-    const prompt = promptInput.value.trim();
-    const imgsrc = previewImage.src;
+async function sendPrompt() {  
+  // Variabel sudah dideklarasikan di scope luar  
+  const prompt = promptInput.value.trim();  
+  const imgsrc = previewImage.src;  
 
-    // Ambil type dan format yang dipilih
-    const type = document.querySelector('input[name="type"]:checked');
-    const format = document.querySelector('input[name="format"]:checked');
+  // Ambil type dan format yang dipilih  
+  const type = document.querySelector('input[name="type"]:checked');  
+  const format = document.querySelector('input[name="format"]:checked');  
 
-    // Cek jika gambar belum diunggah
-    if (!imgsrc || imgsrc.length === 0 || imgsrc === window.location.href) {
-      output.textContent = 'Mohon unggah gambar terlebih dahulu.';
-      return; // Menghentikan eksekusi fungsi
-    }
+  // Cek jika gambar belum diunggah  
+  if (!imgsrc || imgsrc.length === 0 || imgsrc === window.location.href) {  
+    output.textContent = 'Mohon unggah gambar terlebih dahulu.';  
+    return; // Menghentikan eksekusi fungsi  
+  }  
 
-    // Cek jika belum ada yang dipilih (value checked = 0)
-    // Walaupun sudah di-set default, ini untuk jaga-jaga
-    if (!type || !format) {
-      output.textContent = 'Mohon pilih Type dan Format Output.';
-      return;
-    }
+  // Cek jika belum ada yang dipilih (value checked = 0)  
+  if (!type || !format) {  
+    output.textContent = 'Mohon pilih Type dan Format Output.';  
+    return;  
+  }  
 
+  output.textContent = 'Memproses gambar...';  
 
-    output.textContent = 'Memproses gambar...';
+  try {  
+    const formData = new FormData();  
 
-    try {
-      const formData = new FormData();
+    // 🔹 Logika tambahan: otomatis ubah prompt untuk type coding  
+    let finalPrompt = '';  
 
-      // 🔹 Logika tambahan: otomatis ubah prompt untuk type coding
-      let finalPrompt = '';
+    if (type.value === 'Design') {  
+      if (format.value === 'html') {  
+        finalPrompt =  
+          'Deteksi apakah gambar ini memuat elemen atau desain website. ' +  
+          'Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. ' +  
+          'Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';  
+      } else if (format.value === 'css') {  
+        finalPrompt =  
+          'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. ' +  
+          'Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. ' +  
+          'Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';  
+      }  
+    } else if (type.value === 'bug') {  
+      finalPrompt =  
+        'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. ' +  
+        'Jelaskan secara singkat penyebabnya dan solusi perbaikannya. ' +  
+        'Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';  
+    } else {  
+      // default (general)  
+      finalPrompt = prompt;  
+    }  
 
-if (type === 'coding') {
-  if (format === 'html') {
-    finalPrompt =
-      'Deteksi apakah gambar ini memuat elemen atau desain website. ' +
-      'Jika ya, buat ulang desain tersebut hanya dalam format HTML murni tanpa teks tambahan. ' +
-      'Jika tidak ada elemen website yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain HTML yang terdeteksi."';
-  } else if (format === 'css') {
-    finalPrompt =
-      'Analisis apakah gambar ini berisi tampilan antarmuka atau gaya desain website. ' +
-      'Jika ya, hasilkan hanya kode CSS murni tanpa teks tambahan. ' +
-      'Jika tidak ada desain UI yang terdeteksi, balas dengan teks: "Maaf, tidak ada desain CSS yang terdeteksi."';
-  }
-} else if (type === 'bug') {
-  finalPrompt =
-    'Analisis gambar ini, deteksi jika ada kode error, pesan kesalahan, atau indikasi bug. ' +
-    'Jelaskan secara singkat penyebabnya dan solusi perbaikannya. ' +
-    'Jika gambar tidak berisi konteks bug atau error, jawab: "Maaf, gambar ini tidak mengandung bug atau error yang dapat dianalisis."';
-} else {
-  // default (general)
-  finalPrompt = promptInput || 'Deskripsikan isi dari gambar ini.';
-  }
+    // Tambahkan prompt ke FormData  
+    formData.append('prompt', finalPrompt);  
+
+    // Tambahkan file gambar  
+    if (imgsrc.startsWith('data:image')) {  
+      const blob = await (await fetch(imgsrc)).blob();  
+      formData.append('image', blob, 'image.jpg');  
+    }  
+
+    const res = await fetch('/api/gemini', { method: 'POST', body: formData });  
+    const data = await res.json();  
+
+    let cleanResult = (data.result || data.error || 'Tidak ada hasil.')  
+      .replace(/```json\s*([\s\S]*?)```/gi, '$1')  
+      .replace(/```([\s\S]*?)```/gi, '$1')  
+      .trim();  
+
+    output.textContent = cleanResult || 'Tidak ada hasil.';  
+    hideDonateElement();  
+
+  } catch (err) {  
+    output.textContent = 'Error: ' + err.message;  
+    const donateElement = document.getElementById('donate');  
+    if (donateElement) donateElement.style.display = 'block';  
+  }  
 }
-
-      // Tambahkan prompt ke FormData
-      formData.append('prompt', finalPrompt);
-
-      // Tambahkan file gambar
-      if (imgsrc.startsWith('data:image')) {
-        const blob = await (await fetch(imgsrc)).blob();
-        formData.append('image', blob, 'image.jpg');
-      }
-
-      const res = await fetch('/api/gemini', { method: 'POST', body: formData });
-      const data = await res.json();
-
-      let cleanResult = (data.result || data.error || 'Tidak ada hasil.')
-        .replace(/```json\s*([\s\S]*?)```/gi, '$1')
-        .replace(/```([\s\S]*?)```/gi, '$1')
-        .trim();
-
-      output.textContent = cleanResult || 'Tidak ada hasil.';
-      hideDonateElement();
-
-    } catch (err) {
-      output.textContent = 'Error: ' + err.message;
-      const donateElement = document.getElementById('donate');
-      if (donateElement) donateElement.style.display = 'block';
-    }
-  }
   </script>
 
 
