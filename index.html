@@ -333,89 +333,177 @@ Jangan tambahkan teks lain di luar JSON, cukup keluarkan isi JSON-nya saja.
 
 
     
-<div class="options-container">
-  <h3>Type:</h3>
-  <div class="type-options">
-    <label>
-      <input type="radio" name="type" value="general" checked> General
-    </label>
-    <label>
-      <input type="radio" name="type" value="Design"> Web Design 
-    </label>
-    <label>
-      <input type="radio" name="type" value="bug"> Bug / Error
-    </label>
+<div class="options-wrapper">
+  <!-- Type Selection -->
+  <div class="option-group">
+    <h3>Type:</h3>
+    <div class="option-cards" id="type-options">
+      <label class="option-card" data-value="general">
+        <input type="radio" name="type" value="general" checked>
+        <span class="icon">🎨</span>
+        <span class="label">General</span>
+      </label>
+      <label class="option-card" data-value="Design">
+        <input type="radio" name="type" value="Design">
+        <span class="icon">💻</span>
+        <span class="label">Web Design</span>
+      </label>
+      <label class="option-card" data-value="bug">
+        <input type="radio" name="type" value="bug">
+        <span class="icon">🐛</span>
+        <span class="label">Bug / Error</span>
+      </label>
+    </div>
   </div>
 
-  <h3>Format Output:</h3>
-  <div class="format-options">
-    <label data-format="json">
-      <input type="radio" name="format" value="json" checked> JSON
-    </label>
-    <label data-format="text">
-      <input type="radio" name="format" value="text"> Text      
-    </label>
-    <label data-format="html">
-      <input type="radio" name="format" value="html"> HTML
-    </label>
-    <label data-format="css">
-      <input type="radio" name="format" value="css"> CSS
-    </label>
+  <!-- Format Selection -->
+  <div class="option-group">
+    <h3>Format Output:</h3>
+    <div class="option-cards" id="format-options">
+      <label class="option-card" data-format="json">
+        <input type="radio" name="format" value="json" checked>
+        <span class="icon">{} </span>
+        <span class="label">JSON</span>
+      </label>
+      <label class="option-card" data-format="text">
+        <input type="radio" name="format" value="text">
+        <span class="icon">📄</span>
+        <span class="label">Text</span>
+      </label>
+      <label class="option-card" data-format="html">
+        <input type="radio" name="format" value="html">
+        <span class="icon">&lt;/&gt;</span>
+        <span class="label">HTML</span>
+      </label>
+      <label class="option-card" data-format="css">
+        <input type="radio" name="format" value="css">
+        <span class="icon">🎨</span>
+        <span class="label">CSS</span>
+      </label>
+    </div>
   </div>
 </div>
 
 <style>
-.options-container {
-  text-align: center;
-  background: #0f172a;
-  color: #f1f5f9;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
-  width: 90%;
-  max-width: 420px;
+/* ---------- Options Wrapper ---------- */
+.options-wrapper {
   margin: 20px auto;
-  font-family: "Poppins", sans-serif;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
-.options-container h3 {
-  margin-bottom: 10px;
-  color: #38bdf8;
+.option-group h3 {
   font-size: 1.1rem;
+  color: #38bdf8;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 600;
 }
 
-.type-options, .format-options {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+.option-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
 }
 
-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.option-card {
+  position: relative;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
   cursor: pointer;
-  background: #1e293b;
-  padding: 8px 14px;
-  border-radius: 8px;
-  transition: all 0.25s ease;
-  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-label:hover {
-  background: #334155;
-  transform: scale(1.05);
+.option-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 179, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-input[type="radio"] {
-  accent-color: #38bdf8;
-  transform: scale(1.15);
+.option-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 255, 179, 0.2);
+  border-color: #00ffaa;
 }
 
+.option-card:hover::before {
+  opacity: 1;
+}
+
+.option-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0; height: 0;
+}
+
+.option-card input[type="radio"]:checked + .icon,
+.option-card input[type="radio"]:checked + .label {
+  color: #00ffaa;
+  text-shadow: 0 0 8px rgba(0, 255, 170, 0.5);
+}
+
+.option-card input[type="radio"]:checked {
+  outline: none;
+}
+
+.option-card input[type="radio"]:checked ~ .option-card::before {
+  opacity: 1;
+}
+
+.option-card .icon {
+  display: block;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  transition: all 0.3s ease;
+}
+
+.option-card .label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+/* Active State */
+.option-card input[type="radio"]:checked ~ * {
+  color: #00ffaa !important;
+}
+
+.option-card input[type="radio"]:checked {
+  border-color: #00ffaa;
+}
+
+/* Hidden class */
 .hidden {
   display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .option-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .option-card {
+    padding: 12px 8px;
+  }
+  .option-card .icon {
+    font-size: 1.2rem;
+  }
+  .option-card .label {
+    font-size: 0.85rem;
+  }
 }
 </style>
 
