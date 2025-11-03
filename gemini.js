@@ -3,8 +3,32 @@ import formidable from "formidable";
 import fs from "fs";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import pkg from "pg";
 
 dotenv.config(); 
+
+
+
+const { Pool } = pkg;
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
+
+export default async function handler(req, res) {
+  if (req.method !== "GET") {
+    console.log("❌ Metode salah: gunakan GET");
+    return;
+  }
+
+  try {
+    const result = await pool.query("SELECT NOW()");
+    console.log("✅ Koneksi berhasil!");
+    console.log("🕒 Waktu server:", result.rows[0].now);
+  } catch (err) {
+    console.log("❌ Gagal konek DB:", err.message);
+  }
+}
 
 export const config = { api: { bodyParser: false } }; // penting untuk handle upload file
 
