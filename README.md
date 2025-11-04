@@ -128,7 +128,7 @@ Hosting: Vercel
 
 Vercel Deployment (contoh):
 
-👉 https://t-faces.github.io/Gemini-prompt/
+👉 https://gemini-prompt.vercel.app
 
 https://gemini-lab.vercel.app
 
