@@ -127,7 +127,10 @@ Hosting: Vercel
 ⚡ Live Demo
 
 Vercel Deployment (contoh):
-👉 https://gemini-lab.vercel.app
+
+👉 https://t-faces.github.io/Gemini-prompt/
+
+https://gemini-lab.vercel.app
 
 
 🧩 License
